@@ -1,9 +1,30 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include <stdbool.h>
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+#define SDL_ASSERT_LEVEL 2
+
+SDL_Texture* LoadTexture(SDL_Renderer *renderer, char *path){
+    SDL_Texture *texture = NULL;
+    
+    texture = IMG_LoadTexture(renderer, path);
+    if (texture == NULL){
+        printf("Impossible de créér la texture : %s  Erreur : %s \n", path, IMG_GetError());
+        return NULL; 
+    }
+    return texture;
+}
+
 
 int main (int argc, char *argv[])
 {
+    setvbuf(stdout, NULL, _IONBF, 0);
+
+    printf("Start \n");
+
+    int iGameWidth = 1024, iGameHeight = 768;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
@@ -14,14 +35,14 @@ int main (int argc, char *argv[])
     SDL_Window *window = SDL_CreateWindow("Titre fenêtre",
                                                 SDL_WINDOWPOS_CENTERED,
                                                 SDL_WINDOWPOS_CENTERED,
-                                                640,
-                                                480,
+                                                iGameWidth,
+                                                iGameHeight,
                                                 SDL_WINDOW_SHOWN
     );
 
     if (window == NULL)
     {
-        printf("Impossible de créér la fenêtre : %s \n", SDL_GetError());
+        SDL_Log("Impossible de créér la fenêtre : %s \n", SDL_GetError());
         return -1; 
     }
 
@@ -29,10 +50,11 @@ int main (int argc, char *argv[])
 
     if (renderer == NULL)
     {
-        printf("Impossible de créér le rendu : %s \n", SDL_GetError());
+        SDL_Log("Impossible de créér le rendu : %s \n", SDL_GetError());
         return -1; 
     }
 
+    // Game Loop
     while(true)
     {
         SDL_Event event;
@@ -42,7 +64,10 @@ int main (int argc, char *argv[])
             }
         }
 
+        // Efface l'écran
         SDL_RenderClear(renderer);
+
+        // Présente l'écran
         SDL_RenderPresent(renderer);
 
     }

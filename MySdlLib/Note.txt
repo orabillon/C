@@ -1,8 +1,6 @@
 Version 0.0.0.1 
 	- SDL 2	: 2.26.4
-	- SDL Image : 
+	- SDL Image : 2.6.3
 	- SDL TTF	: 
 	- SDL MIXER	: 
 	
-gcc src/main.c -Iinclude -Llib -lmingw32 -lSDL2main -lSDL2 -o bin/prog 			--> compilation SDL
-gcc src/main.c -Iinclude -Llib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -o bin/prog 	--> compilation avec SDL IMAGE 

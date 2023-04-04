@@ -3,8 +3,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 
 typedef struct orn_Texture
 {
@@ -13,6 +14,11 @@ typedef struct orn_Texture
     int iHeight;
 
 } orn_Texture;
+
+typedef struct orn_Font
+{
+    TTF_Font *sdl_font;
+} orn_Font;
 
 
 // initialisation et cloture SDL
@@ -34,5 +40,10 @@ void orn_graphics_setColor(Uint8 iRed, Uint8 iGreen, Uint8 iBlue, Uint8 iAlpha);
 void orn_graphics_line(int iX1, int iY1, int iX2, int iY2);
 void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH);
 void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius);
+
+// Font et Texte
+orn_Font orn_graphics_newFont(const char *path, int iSize);
+orn_Texture orn_graphics_newText(const char *texte, orn_Font font);
+void orn_graphics_freeFont(orn_Font font);
 
 #endif

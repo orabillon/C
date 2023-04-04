@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     */
     while(true)
     {
+        orn_graphics_setColor(0,0,0,255);
         if(orn_graphics_beginDraw() == 0)
         {
             break;

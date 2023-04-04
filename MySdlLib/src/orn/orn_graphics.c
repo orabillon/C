@@ -59,6 +59,9 @@ bool orn_graphics_init( const char *szTitre, int iWidth, int iHeight, bool bFull
         return false;
         } 
     }
+
+    // Permet d'activer le melange des couleur et l'alpha
+    SDL_SetRenderDrawBlendMode(orn_sdl_renderer, SDL_BLENDMODE_BLEND);
     
     return true;
 }
@@ -143,4 +146,114 @@ void orn_graphics_freeImage(orn_Texture image)
         image.sdl_texture = NULL;
     }
 }
+
+// Primitive
+
+void orn_graphics_setColor(Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha)
+{
+    SDL_SetRenderDrawColor(orn_sdl_renderer, uRed, uGreen,uBlue, uAlpha);
+}
+
+void orn_graphics_line(int iX1, int iY1, int iX2, int iY2)
+{
+    SDL_RenderDrawLine(orn_sdl_renderer, iX1, iY1, iX2, iY2);
+}
+
+void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH)
+{
+    SDL_Rect rect;
+    rect.h = iH;
+    rect.w = iW;
+    rect.x = iX;
+    rect.y = iY;    
+    
+    if(strcmp(mode, "line") == 0)
+    {
+        SDL_RenderDrawRect(orn_sdl_renderer, &rect);
+    }
+    else if(strcmp(mode, "fill") == 0)
+    {
+        SDL_RenderFillRect(orn_sdl_renderer, &rect);
+    }
+    
+}
+
+void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius){
+
+    if (strcmp("line", szMode) == 0)
+    {    
+        const int diameter = (iRadius * 2);
+
+        int x = (iRadius - 1);
+        int y = 0;
+        int tx = 1;
+        int ty = 1;
+        int error = (tx - diameter);
+
+        while (x >= y)
+        {
+            // Each of the following renders an octant of the circle
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX + x, iCentreY - y);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX + x, iCentreY + y);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX - x, iCentreY - y);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX - x, iCentreY + y);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX + y, iCentreY - x);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX + y, iCentreY + x);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX - y, iCentreY - x);
+            SDL_RenderDrawPoint(orn_sdl_renderer, iCentreX - y, iCentreY + x);
+
+            if (error <= 0)
+            {
+                ++y;
+                error += ty;
+                ty += 2;
+            }
+
+            if (error > 0)
+            {
+                --x;
+                tx += 2;
+                error += (tx - diameter);
+            }
+        }
+    }
+    if (strcmp("fill", szMode) == 0)
+    {
+        int offsetx, offsety, d;
+        int status;
+
+        offsetx = 0;
+        offsety = iRadius;
+        d = iRadius -1;
+        status = 0;
+
+        while (offsety >= offsetx) {
+
+            status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsety, iCentreY + offsetx, iCentreX + offsety, iCentreY + offsetx);
+            status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsetx, iCentreY + offsety, iCentreX + offsetx, iCentreY + offsety);
+            status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsetx, iCentreY - offsety, iCentreX + offsetx, iCentreY - offsety);
+            status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsety, iCentreY - offsetx, iCentreX + offsety, iCentreY - offsetx);
+
+            if (status < 0) {
+                status = -1;
+                break;
+            }
+
+            if (d >= 2*offsetx) {
+                d -= 2*offsetx + 1;
+                offsetx +=1;
+            }
+            else if (d < 2 * (iRadius - offsety)) {
+                d += 2 * offsety - 1;
+                offsety -= 1;
+            }
+            else {
+                d += 2 * (offsety - offsetx - 1);
+                offsety -= 1;
+                offsetx += 1;
+            }
+        }
+    }
+}
+
 

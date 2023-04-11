@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "orn/orn_graphics.h"
+#include "orn/orn_font.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,9 +22,6 @@ int main(int argc, char *argv[])
 
     /* Variable Jeu*/
     orn_Texture texPlanet = orn_graphics_newImage("assets/images/planet.png");
-    
-    orn_Font font = orn_graphics_newFont("assets/fonts/Disney.ttf", 150);
-    orn_Texture txtHello = orn_graphics_newText("coucou", font);
 
     /*
         Game Loop
@@ -38,7 +36,6 @@ int main(int argc, char *argv[])
 
         
         orn_graphics_draw(texPlanet,100,100);
-        orn_graphics_draw(txtHello,0,0);
 
         orn_graphics_endDraw();
     }
@@ -48,8 +45,6 @@ int main(int argc, char *argv[])
         Nettoyage des pointeur
     */
     orn_graphics_freeImage(texPlanet);
-    orn_graphics_freeImage(txtHello);
-    orn_graphics_freeFont(font);
     orn_graphics_close();
 
     return EXIT_SUCCESS;

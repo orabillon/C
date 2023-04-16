@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include "orn_keyboard.h"
 
 extern SDL_Renderer *orn_sdl_renderer;
 
@@ -16,7 +17,6 @@ typedef struct orn_Texture
     int iHeight;
 
 } orn_Texture;
-
 
 // initialisation et cloture SDL
 bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullScreen);
@@ -37,6 +37,5 @@ void orn_graphics_setColor(Uint8 iRed, Uint8 iGreen, Uint8 iBlue, Uint8 iAlpha);
 void orn_graphics_line(int iX1, int iY1, int iX2, int iY2);
 void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH);
 void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius);
-
 
 #endif

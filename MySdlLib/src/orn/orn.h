@@ -3,9 +3,11 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "SDL.h"
 
-extern const Uint8 *orn_sdl_keyState;
+extern int iGameWidth;
+extern int iGameHeight;
 
+void orn_init(void);
+void orn_close(void);
 
 #endif

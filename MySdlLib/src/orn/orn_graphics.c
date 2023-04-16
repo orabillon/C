@@ -8,20 +8,20 @@ SDL_Window *orn_sdl_window;
 SDL_Renderer *orn_sdl_renderer;
 
 // initialisation et cloture SDL
-bool orn_graphics_init( const char *szTitre, int iWidth, int iHeight, bool bFullScreen)
+bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullScreen)
 {
     Uint32 uFlagsWindos = SDL_WINDOW_SHOWN;
     Uint32 uFlagsRenderer = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
     Uint32 uFlagsSdlImage = IMG_INIT_JPG | IMG_INIT_PNG;
 
-    if(bFullScreen)
+    if (bFullScreen)
     {
         uFlagsWindos |= SDL_WINDOW_FULLSCREEN;
     }
     /*
         initialisation SDL
     */
-    if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         printf("Impossible d'initialiser la SDL\n");
         return false;
@@ -36,10 +36,10 @@ bool orn_graphics_init( const char *szTitre, int iWidth, int iHeight, bool bFull
         SDL_WINDOWPOS_CENTERED,
         iWidth,
         iHeight,
-        uFlagsWindos
-    );
+        uFlagsWindos);
 
-    if (orn_sdl_window == NULL){
+    if (orn_sdl_window == NULL)
+    {
         printf("Impossible de creer la fenetre : %s\n", SDL_GetError());
         return false;
     }
@@ -47,22 +47,24 @@ bool orn_graphics_init( const char *szTitre, int iWidth, int iHeight, bool bFull
     /*
         création renderer
     */
-    orn_sdl_renderer = SDL_CreateRenderer(orn_sdl_window,-1,uFlagsRenderer);
-    if (orn_sdl_renderer == NULL){
+    orn_sdl_renderer = SDL_CreateRenderer(orn_sdl_window, -1, uFlagsRenderer);
+    if (orn_sdl_renderer == NULL)
+    {
         printf("Impossible de creer le renderer : %s\n", SDL_GetError());
         return false;
     }
     else
     {
         /* Initialisation SDL IMAGE*/
-        if(!(IMG_Init(uFlagsSdlImage) & uFlagsSdlImage)){
+        if (!(IMG_Init(uFlagsSdlImage) & uFlagsSdlImage))
+        {
             printf("Impossible d'initialiser la librairie SDL_IMAGE : %s\n", IMG_GetError());
-        return false;
-        } 
+            return false;
+        }
     }
 
     /* Initialisation SDL_TTF*/
-    if(TTF_Init() == -1)
+    if (TTF_Init() == -1)
     {
         printf("Impossible d'initialiser la librairie SDL_TTF : %s\n", TTF_GetError());
         return false;
@@ -70,7 +72,7 @@ bool orn_graphics_init( const char *szTitre, int iWidth, int iHeight, bool bFull
 
     // Permet d'activer le melange des couleur et l'alpha
     SDL_SetRenderDrawBlendMode(orn_sdl_renderer, SDL_BLENDMODE_BLEND);
-    
+
     return true;
 }
 
@@ -90,8 +92,10 @@ int orn_graphics_beginDraw(void)
 {
     /*Parcour des évenement SDL*/
     SDL_Event event;
-    if (SDL_PollEvent(&event)){
-        if (event.type == SDL_QUIT){
+    if (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT)
+        {
             return 0;
         }
     }
@@ -106,6 +110,7 @@ void orn_graphics_endDraw(void)
 {
     /* Affiche l'écran*/
     SDL_RenderPresent(orn_sdl_renderer);
+    orn_keyboard_old();
 }
 
 void orn_graphics_draw(orn_Texture image, int iX, int iY)
@@ -121,8 +126,9 @@ SDL_Texture *LoadTexture(const char *path)
 
     SDL_Texture *Texture = NULL;
 
-    Texture= IMG_LoadTexture(orn_sdl_renderer, path);
-    if(Texture == NULL){
+    Texture = IMG_LoadTexture(orn_sdl_renderer, path);
+    if (Texture == NULL)
+    {
         printf("Impossible de creer la texture a partir de %s erreur : %s\n", path, IMG_GetError());
         return NULL;
     }
@@ -135,7 +141,7 @@ orn_Texture orn_graphics_newImage(const char *path)
     orn_Texture tex = {NULL, 0, 0};
 
     tex.sdl_texture = LoadTexture(path);
-    if(tex.sdl_texture == NULL)
+    if (tex.sdl_texture == NULL)
     {
         printf("Impossible de charger la texture a partir de %s erreur : %s\n", path, IMG_GetError());
     }
@@ -149,7 +155,7 @@ orn_Texture orn_graphics_newImage(const char *path)
 
 void orn_graphics_freeImage(orn_Texture image)
 {
-    if(image.sdl_texture != NULL)
+    if (image.sdl_texture != NULL)
     {
         SDL_DestroyTexture(image.sdl_texture);
         image.sdl_texture = NULL;
@@ -160,7 +166,7 @@ void orn_graphics_freeImage(orn_Texture image)
 
 void orn_graphics_setColor(Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha)
 {
-    SDL_SetRenderDrawColor(orn_sdl_renderer, uRed, uGreen,uBlue, uAlpha);
+    SDL_SetRenderDrawColor(orn_sdl_renderer, uRed, uGreen, uBlue, uAlpha);
 }
 
 void orn_graphics_line(int iX1, int iY1, int iX2, int iY2)
@@ -174,23 +180,23 @@ void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH)
     rect.h = iH;
     rect.w = iW;
     rect.x = iX;
-    rect.y = iY;    
-    
-    if(strcmp(mode, "line") == 0)
+    rect.y = iY;
+
+    if (strcmp(mode, "line") == 0)
     {
         SDL_RenderDrawRect(orn_sdl_renderer, &rect);
     }
-    else if(strcmp(mode, "fill") == 0)
+    else if (strcmp(mode, "fill") == 0)
     {
         SDL_RenderFillRect(orn_sdl_renderer, &rect);
     }
-    
 }
 
-void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius){
+void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius)
+{
 
     if (strcmp("line", szMode) == 0)
-    {    
+    {
         const int diameter = (iRadius * 2);
 
         int x = (iRadius - 1);
@@ -233,30 +239,35 @@ void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRa
 
         offsetx = 0;
         offsety = iRadius;
-        d = iRadius -1;
+        d = iRadius - 1;
         status = 0;
 
-        while (offsety >= offsetx) {
+        while (offsety >= offsetx)
+        {
 
             status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsety, iCentreY + offsetx, iCentreX + offsety, iCentreY + offsetx);
             status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsetx, iCentreY + offsety, iCentreX + offsetx, iCentreY + offsety);
             status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsetx, iCentreY - offsety, iCentreX + offsetx, iCentreY - offsety);
             status += SDL_RenderDrawLine(orn_sdl_renderer, iCentreX - offsety, iCentreY - offsetx, iCentreX + offsety, iCentreY - offsetx);
 
-            if (status < 0) {
+            if (status < 0)
+            {
                 status = -1;
                 break;
             }
 
-            if (d >= 2*offsetx) {
-                d -= 2*offsetx + 1;
-                offsetx +=1;
+            if (d >= 2 * offsetx)
+            {
+                d -= 2 * offsetx + 1;
+                offsetx += 1;
             }
-            else if (d < 2 * (iRadius - offsety)) {
+            else if (d < 2 * (iRadius - offsety))
+            {
                 d += 2 * offsety - 1;
                 offsety -= 1;
             }
-            else {
+            else
+            {
                 d += 2 * (offsety - offsetx - 1);
                 offsety -= 1;
                 offsetx += 1;
@@ -264,6 +275,3 @@ void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRa
         }
     }
 }
-
-
-

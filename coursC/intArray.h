@@ -5,10 +5,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void intArray_debug(int *tab, int len);
-void intArray_positive_values(int *tab, int len);
+typedef struct intarray
+{
+    int *data;
+    int len;
 
-bool intArray_search(int *tab, int len, int n);
-int intArray_nb_occurences(int *tab, int len, int n);
+} intarray;
+
+intarray intArray_create(int len);
+
+void intArray_debug(intarray array);
+void intArray_positive_values(intarray array);
+bool intArray_search(intarray array, int n);
+int intArray_nb_occurences(intarray array, int n);
 
 #endif

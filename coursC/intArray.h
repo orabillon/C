@@ -76,4 +76,56 @@ void intArray_set(intarray array, int index, int value);
  */
 int intArray_length(intarray array);
 
+/**
+ * Retourne un tableau d'intarray avec le contenu des deux passer en parametres
+ * @param array1 premier tableau
+ * @param array2 second tableau
+ * @return un nouveau tableau contenant le contenu des deux passer en parametre
+ */
+intarray intArray_concat(intarray array1, intarray array2);
+
+/**
+ * Retourne l'index de l'element min un tableau d'intarray
+ * @param array tableau pour la recherche du min
+ * @return index de l'element min du tableau
+ */
+int intArray_get_index_min(intarray array);
+
+/**
+ * Retourne l'index de l'element min d'un tableau d'intarray depuis un index jusqu'a la fin
+ * @param array tableau pour la recherche du min
+ * @param index index de depart
+ * @return index de l'élément min du tableau entre l'index et la fin
+ */
+int intArray_get_index_min_from(intarray array, int index);
+
+/**
+ * Retourne l'element min d'un tableau d'intarray
+ * @param array tableau pour la recherche du min
+ * @return Element min du tableau
+ */
+int intArray_get_min(intarray array);
+
+/**
+ * Retourne l'index de l'element max d'un tableau d'intarray
+ * @param array tableau pour la recherche du max
+ * @return index de l'element max du tableau
+ */
+int intArray_get_index_max(intarray array);
+
+/**
+ * Retourne l'index de l'element max d'un tableau d'intarray depuis un index jusqu'a la fin
+ * @param array tableau pour la recherche du max
+ * @param index index de depart
+ * @return index de l'élément max du tableau entre l'index et la fin
+ */
+int intArray_get_index_max_from(intarray array, int index);
+
+/**
+ * Retourne l'element max d'un tableau d'intarray
+ * @param array tableau pour la recherche du max
+ * @return Element max du tableau
+ */
+int intArray_get_max(intarray array);
+
 #endif

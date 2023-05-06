@@ -20,7 +20,7 @@ typedef struct orn_Texture
 } orn_Texture;
 
 // initialisation et cloture SDL
-bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullScreen);
+bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight, int iGameWidth, int iGameHeight, bool bFullScreen);
 void orn_graphics_close(void);
 
 // Game Loop

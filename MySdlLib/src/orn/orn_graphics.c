@@ -11,9 +11,9 @@ float orn_dt = 0;
 Uint32 _frameStart = 0;
 
 // initialisation et cloture SDL
-bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullScreen)
+bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight, int iGameWidth, int iGameHeight, bool bFullScreen)
 {
-    Uint32 uFlagsWindos = SDL_WINDOW_SHOWN;
+    Uint32 uFlagsWindos = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
     Uint32 uFlagsRenderer = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
     Uint32 uFlagsSdlImage = IMG_INIT_JPG | IMG_INIT_PNG;
 
@@ -37,8 +37,8 @@ bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullS
         szTitre,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        iWidth,
-        iHeight,
+        iWindowWidth,
+        iWindowHeight,
         uFlagsWindos);
 
     if (orn_sdl_window == NULL)
@@ -72,6 +72,13 @@ bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullS
         printf("Impossible d'initialiser la librairie SDL_TTF : %s\n", TTF_GetError());
         return false;
     }
+
+    // Mise en place taille logique
+    SDL_SetWindowMinimumSize(orn_sdl_window, iGameWidth, iGameHeight);
+    SDL_RenderSetLogicalSize(orn_sdl_renderer, iGameWidth, iGameHeight);
+
+    // Pixel Art
+    SDL_RenderSetIntegerScale(orn_sdl_renderer, SDL_TRUE);
 
     // Permet d'activer le melange des couleur et l'alpha
     SDL_SetRenderDrawBlendMode(orn_sdl_renderer, SDL_BLENDMODE_BLEND);

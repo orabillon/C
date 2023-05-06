@@ -13,10 +13,12 @@ int main(int argc, char *argv[])
     /*
         variable
     */
-    int iGameWidth = 1024;
-    int iGameHeight = 768;
+    int iGameWidth = 256;
+    int iGameHeight = 192;
+    int iWindowWidth = 1024;
+    int iWindowHeight = 768;
 
-    if (!orn_graphics_init("Demo SDL", iGameWidth, iGameHeight, false))
+    if (!orn_graphics_init("Demo SDL", iWindowWidth, iWindowHeight, iGameWidth, iGameHeight, false))
     {
         return EXIT_FAILURE;
     };

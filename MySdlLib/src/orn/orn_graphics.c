@@ -7,6 +7,9 @@
 SDL_Window *orn_sdl_window;
 SDL_Renderer *orn_sdl_renderer;
 
+float orn_dt = 0;
+Uint32 _frameStart = 0;
+
 // initialisation et cloture SDL
 bool orn_graphics_init(const char *szTitre, int iWidth, int iHeight, bool bFullScreen)
 {
@@ -90,6 +93,12 @@ void orn_graphics_close(void)
 // Game Loop
 int orn_graphics_beginDraw(void)
 {
+
+    /* Calcul du delta time */
+    Uint32 now = SDL_GetTicks();
+    orn_dt = (now - _frameStart) / 1000.0;
+    _frameStart = now;
+
     /*Parcour des évenement SDL*/
     SDL_Event event;
     if (SDL_PollEvent(&event))
@@ -111,6 +120,17 @@ void orn_graphics_endDraw(void)
     /* Affiche l'écran*/
     SDL_RenderPresent(orn_sdl_renderer);
     orn_keyboard_old();
+
+    /* Limitation FPS*/
+    int frameTime = SDL_GetTicks() - _frameStart;
+    if (frameTime < (1000 / 60))
+    {
+        int delay = (1000 / 60) - frameTime;
+        if (delay > 0)
+        {
+            SDL_Delay(delay);
+        }
+    }
 }
 
 void orn_graphics_draw(orn_Texture image, int iX, int iY)

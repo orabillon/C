@@ -9,6 +9,7 @@
 #include "orn_keyboard.h"
 
 extern SDL_Renderer *orn_sdl_renderer;
+extern float orn_dt;
 
 typedef struct orn_Texture
 {

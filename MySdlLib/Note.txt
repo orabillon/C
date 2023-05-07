@@ -2,5 +2,5 @@ Version 0.0.0.1
 	- SDL 2	: 2.26.4
 	- SDL Image : 2.6.3
 	- SDL TTF	: 2.20.2
-	- SDL MIXER	: 
+	- SDL MIXER	: 2.6.3
 	

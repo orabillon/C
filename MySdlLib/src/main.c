@@ -2,6 +2,7 @@
 #include "orn/orn_graphics.h"
 #include "orn/orn_font.h"
 #include "orn/orn_keyboard.h"
+#include "orn/orn_sound.h"
 #include "orn/orn.h"
 #include "game.h"
 
@@ -24,6 +25,7 @@ int main(int argc, char *argv[])
     };
 
     _orn_keyboard_init();
+    orn_sound_init();
 
     printf("Start\n");
 
@@ -50,6 +52,7 @@ int main(int argc, char *argv[])
     Nettoyage des pointeur
 */
     game_close();
+    orn_sound_close();
     orn_close();
 
     printf("Fin Programme\n");

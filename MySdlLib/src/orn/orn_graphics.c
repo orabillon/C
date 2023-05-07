@@ -10,7 +10,17 @@ SDL_Renderer *orn_sdl_renderer;
 float orn_dt = 0;
 Uint32 _frameStart = 0;
 
-// initialisation et cloture SDL
+/**
+ * Initialise la fenêtre et le renderer de la SDL2 avec les flags SDL_INIT_EVERYTHING / SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+ * Initialise également SDL_IMAGE et SDL_TTF
+ * @param szTitle Titre de la fenetre
+ * @param iWindowWidth Largeur de la fenetre
+ * @param iWindowHeight Hauteur de la fenetre
+ * @param iGameWidth Largeur de l'écran de jeu
+ * @param iGameHeight Hauteur de l'écran de jeu
+ * @param bFullScreen Active ou non le plein ecran
+ * @return true en cas de succes sinon false en cas d'erreur
+ */
 bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight, int iGameWidth, int iGameHeight, bool bFullScreen)
 {
     Uint32 uFlagsWindos = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -86,6 +96,9 @@ bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight,
     return true;
 }
 
+/**
+ Détruit la fenêtre et le renderer et quitte proprement les extention et la SDL2
+*/
 void orn_graphics_close(void)
 {
     SDL_DestroyRenderer(orn_sdl_renderer);
@@ -98,6 +111,10 @@ void orn_graphics_close(void)
 }
 
 // Game Loop
+/**
+ * Gère le SDL_PollEvent et le calcul du Delta Time, vide le renderer
+ * @return 0 en cas d'evenement SDL_QUIT sinon 1
+ */
 int orn_graphics_beginDraw(void)
 {
 
@@ -122,6 +139,9 @@ int orn_graphics_beginDraw(void)
     return 1;
 }
 
+/**
+ * Execute le rendu final et limite le framrate
+ */
 void orn_graphics_endDraw(void)
 {
     /* Affiche l'écran*/
@@ -140,14 +160,30 @@ void orn_graphics_endDraw(void)
     }
 }
 
+/**
+ * Dessine une texture a l'écran
+ * @param image  Texture a dessiner
+ * @param iX      Position x
+ * @param iY      Position y
+ */
 void orn_graphics_draw(orn_Texture image, int iX, int iY)
 {
     SDL_Rect recDestination = {iX, iY, image.iWidth, image.iHeight};
+    SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
+    if (image.transparency)
+    {
+        SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
+    }
     SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, NULL, &recDestination);
 }
 
 // images
 
+/**
+ * Charge une image en memoire
+ * @param *path Chemin de l'image à charger
+ * @return Retourne un pointeur sur la texture SDL Créée
+ */
 SDL_Texture *LoadTexture(const char *path)
 {
 
@@ -163,9 +199,14 @@ SDL_Texture *LoadTexture(const char *path)
     return Texture;
 }
 
+/**
+ * Créer une ORN_TEXTURE avec l'image demander par l'utilisateur
+ * @param *path  Chemin de l'image à créer
+ * @return Retourne un ORN_TEXTURE
+ */
 orn_Texture orn_graphics_newImage(const char *path)
 {
-    orn_Texture tex = {NULL, 0, 0};
+    orn_Texture tex = {NULL, 0, 0, false, 255, 255, 255, 255};
 
     tex.sdl_texture = LoadTexture(path);
     if (tex.sdl_texture == NULL)
@@ -180,6 +221,10 @@ orn_Texture orn_graphics_newImage(const char *path)
     return tex;
 }
 
+/**
+ * Libère la memoire occuper par la texture
+ * @param image  texture a supprimer
+ */
 void orn_graphics_freeImage(orn_Texture image)
 {
     if (image.sdl_texture != NULL)
@@ -189,36 +234,93 @@ void orn_graphics_freeImage(orn_Texture image)
     }
 }
 
+/**
+ * Modifie la couleur a appliquer sur une texture
+ * @param *image  pointeur image source
+ * @param uRed           0-255 - pourcentage de rouge de la couleur à appliquer
+ * @param uGreen         0-255 - pourcentage de vert de la couleur à appliquer
+ * @param uBlue          0-255 - pourcentage de bleu de la couleur à appliquer
+ * @param uAlpha         0-255 - pourcentage de transparence pour la texture
+ */
+void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha)
+{
+    image->uAlpha = uAlpha;
+    image->uRed = uRed;
+    image->uGreen = uGreen;
+    image->uBlue = uBlue;
+}
+
+/**
+ * Modifie la transparence d'une texture
+ * @param *image  pointeur image source
+ * @param bTransparency  true / false pour activer ou non la transparence
+ * @param uAlpha         0-255 - pourcentage de transparence pour la texture
+ */
+void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha)
+{
+    image->transparency = bTransparency;
+    image->uAlpha = uAlpha;
+}
+
 // Primitive
 
+/**
+ * Modifie la couleur du dessin à l'ecran
+ * @param uRed           0-255 - pourcentage de rouge de la couleur à appliquer
+ * @param uGreen         0-255 - pourcentage de vert de la couleur à appliquer
+ * @param uBlue          0-255 - pourcentage de bleu de la couleur à appliquer
+ * @param uAlpha         0-255 - pourcentage de transparence pour la texture
+ */
 void orn_graphics_setColor(Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha)
 {
     SDL_SetRenderDrawColor(orn_sdl_renderer, uRed, uGreen, uBlue, uAlpha);
 }
 
+/**
+ * Dessine une ligne a l'écran
+ * @param iX1         coordonnée x du premier point
+ * @param iY1         coordonnée y du premier point
+ * @param iX2         coordonnée x du second point
+ * @param iY2         coordonnée x du second point
+ */
 void orn_graphics_line(int iX1, int iY1, int iX2, int iY2)
 {
     SDL_RenderDrawLine(orn_sdl_renderer, iX1, iY1, iX2, iY2);
 }
 
-void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH)
+/**
+ * Dessine un rectancle sur l'écran
+ * @param *szMode    Type du remplissage (line / fill)
+ * @param iX         Coordonnée x du point en haut a gauche
+ * @param iY         Coordonnée y du point en haut a gauche
+ * @param iWidth     Longeur du rectangle
+ * @param iHeight    Hauteur du rectangle
+ */
+void orn_graphics_rectangle(const char *szMode, int iX, int iY, int iWidth, int iHeight)
 {
     SDL_Rect rect;
-    rect.h = iH;
-    rect.w = iW;
+    rect.h = iHeight;
+    rect.w = iWidth;
     rect.x = iX;
     rect.y = iY;
 
-    if (strcmp(mode, "line") == 0)
+    if (strcmp(szMode, "line") == 0)
     {
         SDL_RenderDrawRect(orn_sdl_renderer, &rect);
     }
-    else if (strcmp(mode, "fill") == 0)
+    else if (strcmp(szMode, "fill") == 0)
     {
         SDL_RenderFillRect(orn_sdl_renderer, &rect);
     }
 }
 
+/**
+ * Dessine un cercle sur l'écran
+ * @param *szMode    Type du remplissage (line / fill)
+ * @param iCentreX   Coordonnée x du point du centre
+ * @param iCentreY   Coordonnée y du point du centre
+ * @param iRadius    Rayon du cercle
+ */
 void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius)
 {
 

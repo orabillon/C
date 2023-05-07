@@ -62,11 +62,14 @@ void game_update(void)
 
 void game_draw(void)
 {
+    orn_graphics_SetTextureColor(&texPlanet, 0, 255, 0, 0);
+    orn_graphics_SetTextureTransparency(&texPlanet, true, 50);
     orn_graphics_draw(texPlanet, posX, posY);
 
     char sDT[255];
     sprintf(sDT, "%f", orn_dt);
     textDt = orn_font_newText(sDT, font);
+    orn_graphics_SetTextureColor(&textDt, 255, 0, 0, 0);
     orn_graphics_draw(textDt, 50, 50);
 }
 

@@ -11,11 +11,27 @@
 extern SDL_Renderer *orn_sdl_renderer;
 extern float orn_dt;
 
+/**
+ * Represente une image
+ * @param iWidth Largeur de l'image
+ * @param iHeight Hauteur de l'image
+ * @param transparency Prendre en compte la transparence pour la texture
+ * @param uAlpha 0-255 - pourcentage de transparence de la couleur à appliquer
+ * @param uRed   0-255 - pourcentage de rouge de la couleur à appliquer
+ * @param uGreen 0-255 - pourcentage de vert de la couleur à appliquer
+ * @param uBlue  0-255 - pourcentage de bleu de la couleur à appliquer
+ * @param *sdl_texture Texture SDL2 de l'image
+ */
 typedef struct orn_Texture
 {
     SDL_Texture *sdl_texture;
     int iWidth;
     int iHeight;
+    bool transparency;
+    Uint8 uAlpha;
+    Uint8 uRed;
+    Uint8 uGreen;
+    Uint8 uBlue;
 
 } orn_Texture;
 
@@ -32,11 +48,13 @@ SDL_Texture *LoadTexture(const char *path);
 orn_Texture orn_graphics_newImage(const char *path);
 void orn_graphics_freeImage(orn_Texture image);
 void orn_graphics_draw(orn_Texture image, int iX, int iY);
+void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha);
+void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha);
 
 // Primitive
 void orn_graphics_setColor(Uint8 iRed, Uint8 iGreen, Uint8 iBlue, Uint8 iAlpha);
 void orn_graphics_line(int iX1, int iY1, int iX2, int iY2);
-void orn_graphics_rectangle(const char *mode, int iX, int iY, int iW, int iH);
+void orn_graphics_rectangle(const char *szMode, int iX, int iY, int iWidth, int iHeight);
 void orn_graphics_circle(const char *szMode, int iCentreX, int iCentreY, int iRadius);
 
 #endif

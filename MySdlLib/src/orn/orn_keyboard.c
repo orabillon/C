@@ -7,6 +7,10 @@ int TailleTableau;
 
 Uint8 *_orn_oldKeystate;
 
+/**
+ * Structure de mappage du clavier
+ * Attention ScanCode clavier en qwerty
+ */
 orn_sdlkey _orn_keymap[] = {
     // SDL_SCANCODE = QWERTY
     {"a", SDL_SCANCODE_Q},
@@ -87,6 +91,11 @@ orn_sdlkey _orn_keymap[] = {
     {"KP9", SDL_SCANCODE_KP_9},
     {"KP0", SDL_SCANCODE_KP_0}};
 
+/**
+ * recherche la touche dans le tableau de mappage
+ * @param *key touche rechercher
+ * @return retourne un orn_sdlkey ou null si pas trouvé
+ */
 orn_sdlkey *_key_search(const char *key)
 {
     size_t num_items = sizeof(_orn_keymap) / sizeof(orn_sdlkey);
@@ -100,6 +109,9 @@ orn_sdlkey *_key_search(const char *key)
     return NULL;
 }
 
+/**
+ * initialise un objet interne pour la gestion du clavier
+ */
 void _orn_keyboard_init(void)
 {
     _orn_sdl_keystate = SDL_GetKeyboardState(&TailleTableau);
@@ -111,6 +123,9 @@ void _orn_keyboard_close(void)
     free(_orn_oldKeystate);
 }
 
+/**
+ * Sauvegarde l'etat precedent du tableau
+ */
 void orn_keyboard_old(void)
 {
     for (int i = 0; i < TailleTableau; i++)
@@ -119,6 +134,11 @@ void orn_keyboard_old(void)
     }
 }
 
+/**
+ * Recherche dans le orn_keystate si la touche en parametre est appuyer
+ * évenement continu
+ * @param *key touche a chercher
+ */
 bool orn_keyboard_isDown(const char *key)
 {
     orn_sdlkey *found = _key_search(key);
@@ -131,6 +151,11 @@ bool orn_keyboard_isDown(const char *key)
     return NULL;
 }
 
+/**
+ * Recherche dans le orn_keystate si la touche en parametre a été presser
+ * évenement unique
+ * @param *key touche a chercher
+ */
 bool orn_keyboard_KeyPressed(const char *key)
 {
     orn_sdlkey *found = _key_search(key);

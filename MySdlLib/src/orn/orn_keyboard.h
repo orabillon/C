@@ -5,6 +5,11 @@
 #include <stdbool.h>
 #include "SDL.h"
 
+/**
+ * Structure orn_sdlkey representant une touche du clavier
+ * @param  *key Type de la touche (ex a / b / "right" ...)
+ * @param   sdl_scancode Code SDL de la touche
+ */
 typedef struct orn_sdlkey
 {
     char *key; // "a", "right", ...

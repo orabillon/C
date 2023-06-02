@@ -35,6 +35,21 @@ typedef struct orn_Texture
 
 } orn_Texture;
 
+/**
+ * Represente un rectangle
+ * @param x coordonnée x de l'origine
+ * @param y coordonnée y de l'origine
+ * @param w largeur du rectangle
+ * @param h hauteur du rectangle
+ */
+typedef struct orn_rect
+{
+    int x;
+    int y;
+    int w;
+    int h;
+} orn_rect;
+
 // initialisation et cloture SDL
 bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight, int iGameWidth, int iGameHeight, bool bFullScreen);
 void orn_graphics_close(void);
@@ -48,6 +63,7 @@ SDL_Texture *LoadTexture(const char *path);
 orn_Texture orn_graphics_newImage(const char *path);
 void orn_graphics_freeImage(orn_Texture image);
 void orn_graphics_draw(orn_Texture image, int iX, int iY);
+void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int iY);
 void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha);
 void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha);
 

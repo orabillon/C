@@ -14,10 +14,10 @@ int main(int argc, char *argv[])
     /*
         variable
     */
-    int iGameWidth = 256;
-    int iGameHeight = 192;
-    int iWindowWidth = 1024;
-    int iWindowHeight = 768;
+    int iGameWidth = 320;
+    int iGameHeight = 200;
+    int iWindowWidth = iGameWidth * 3;
+    int iWindowHeight = iGameHeight * 3;
 
     if (!orn_graphics_init("Demo SDL", iWindowWidth, iWindowHeight, iGameWidth, iGameHeight, false))
     {
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
             break;
         };
 
-        game_update();
+        game_update(orn_dt);
         game_draw();
 
         orn_graphics_endDraw();

@@ -177,6 +177,25 @@ void orn_graphics_draw(orn_Texture image, int iX, int iY)
     SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, NULL, &recDestination);
 }
 
+/**
+ * Dessine une portion d'une texture a l'écran
+ * @param image         Texture a dessiner
+ * @param rectSource    defini la portion de l'image a afficher
+ * @param iX            Position x
+ * @param iY            Position y
+ */
+void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int iY)
+{
+    SDL_Rect recDestination = {iX, iY, rectSource.w, rectSource.h};
+    SDL_Rect recSource = {rectSource.x, rectSource.y, rectSource.w, rectSource.h};
+    SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
+    if (image.transparency)
+    {
+        SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
+    }
+    SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, &recSource, &recDestination);
+}
+
 // images
 
 /**

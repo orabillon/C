@@ -3,81 +3,56 @@
 #include "orn/orn_font.h"
 #include "orn/orn_keyboard.h"
 #include "orn/orn_sound.h"
+#include "orn/orn_animation.h"
+#include <math.h>
 
 /* Variable Jeu*/
-orn_Texture texPlanet;
-orn_Texture textDt;
 orn_Font font;
-orn_son son;
-orn_fx fx;
-int posX;
-int posY;
+orn_Texture texIndiana;
+orn_Texture Vaisseau;
+
+void DrawQuad(orn_Texture *tex, int quadW, int quadH, int numFrame, int x, int y)
+{
+
+    int nbCol = tex->iWidth / quadW;
+    int c = 0;
+    int l = 0;
+
+    l = (int)floor(numFrame / nbCol);
+    c = numFrame - (l * nbCol);
+
+    int xIm = c * quadW;
+    int yIm = l * quadH;
+
+    orn_rect rectSource = {xIm, yIm, quadW, quadH};
+
+    orn_graphics_drawQuad(*tex, rectSource, x, y);
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 void game_load(void)
 {
     /* Variable Jeu*/
-    texPlanet = orn_graphics_newImage("assets/images/planet.png");
     font = orn_font_newFont("assets/fonts/Open24.ttf", 35);
-    posX = 100;
-    posY = 100;
-
-    son = orn_sound_musique_new("assets/sons/Spiritual.mp3");
-    fx = orn_sound_fx_new("assets/sons/Coin.wav");
-
-    orn_sound_musique_play(&son, -1);
+    texIndiana = orn_graphics_newImage("assets/images/indiana.png");
+    Vaisseau = orn_graphics_newImage("assets/images/player.png");
 }
 
-void game_update(void)
+void game_update(float dt)
 {
-    if (orn_keyboard_isDown("a"))
-    {
-        posX++;
-    }
-    if (orn_keyboard_KeyPressed("left"))
-    {
-        posX -= 20;
-    }
-
-    if (orn_keyboard_isDown("up"))
-    {
-        posY--;
-    }
-    if (orn_keyboard_isDown("down"))
-    {
-        posY++;
-    }
-    if (orn_keyboard_KeyPressed("p"))
-    {
-        orn_sound_fx_play(-1, &fx, 1);
-    }
-    if (orn_keyboard_KeyPressed("r"))
-    {
-        orn_sound_musique_resume();
-    }
-    if (orn_keyboard_KeyPressed("s"))
-    {
-        orn_sound_musique_stop();
-    }
 }
 
 void game_draw(void)
 {
-    orn_graphics_SetTextureColor(&texPlanet, 0, 255, 0, 0);
-    orn_graphics_SetTextureTransparency(&texPlanet, true, 50);
-    orn_graphics_draw(texPlanet, posX, posY);
-
-    char sDT[255];
-    sprintf(sDT, "%f", orn_dt);
-    textDt = orn_font_newText(sDT, font);
-    orn_graphics_SetTextureColor(&textDt, 255, 0, 0, 0);
-    orn_graphics_draw(textDt, 50, 50);
+    DrawQuad(&texIndiana, 25, 24, 0, 15, 15);
+    DrawQuad(&Vaisseau, 30, 16, 12, 50, 50);
 }
 
 void game_close(void)
 {
-    orn_graphics_freeImage(texPlanet);
-    orn_graphics_freeImage(textDt);
-    orn_sound_musique_delete(&son);
-    orn_sound_fx_delete(&fx);
+    orn_font_freeFont(font);
+    orn_graphics_freeImage(texIndiana);
+    orn_graphics_freeImage(Vaisseau);
     orn_graphics_close();
 }

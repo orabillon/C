@@ -1,0 +1,9 @@
+Version 0.0.0.1 
+	- SDL 2	: 2.26.4
+	- SDL Image : 2.6.3
+	- SDL TTF	: 2.20.1
+	- SDL MIXER	: 2.6.2
+	
+
+	
+gcc -Wall -Werror -pedantic src/main.c src/orn/orn.c src/orn/orn_graphics.c src/orn/orn_font.c src/orn/orn_keyboard.c src/orn/orn_sound.c src/orn/orn_animation.c src/game.c -o bin/prog  $(sdl2-config --cflags --libs) -lSDL2_ttf -lSDL2_mixer -lSDL2_image

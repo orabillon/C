@@ -37,6 +37,7 @@ void game_load(void)
     font = orn_font_newFont("assets/fonts/Open24.ttf", 35);
     texIndiana = orn_graphics_newImage("assets/images/indiana.png");
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
+
 }
 
 void game_update(float dt)
@@ -47,6 +48,8 @@ void game_draw(void)
 {
     DrawQuad(&texIndiana, 25, 24, 0, 15, 15);
     DrawQuad(&Vaisseau, 30, 16, 12, 50, 50);
+
+    
 }
 
 void game_close(void)

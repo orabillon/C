@@ -196,6 +196,33 @@ void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int i
     SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, &recSource, &recDestination);
 }
 
+/**
+ * Prepare le dessin d'une portion de texture a l'écran
+ * @param *tex          Texture pour le dessin
+ * @param iQuadW        Largeur de la portion de la texture a afficher
+ * @param iQuadH        Hauteur de la portion de la texture a afficher
+ * @param iNumFrame     Numero de la portion de l'image a afficher
+ * @param iX            Position x
+ * @param iY            Position y
+ */
+void orn_graphics_drawQuad_game(orn_Texture *tex, int iQuadW, int iQuadH, int iNumFrame, int iX, int iY)
+{
+
+    int nbCol = tex->iWidth / iQuadW;
+    int c = 0;
+    int l = 0;
+
+    l = (int)floor(iNumFrame / nbCol);
+    c = iNumFrame - (l * nbCol);
+
+    int xIm = c * iQuadW;
+    int yIm = l * iQuadH;
+
+    orn_rect rectSource = {xIm, yIm, iQuadW, iQuadH};
+
+    orn_graphics_drawQuad(*tex, rectSource, iX, iY);
+}
+
 // images
 
 /**

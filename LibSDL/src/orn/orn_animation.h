@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 #include "orn_graphics.h"
+#include "orn_param.h"
 
 /**
  * Structure animation
@@ -26,18 +27,23 @@ typedef struct orn_animation
     char *typeAnimation;
     int iWidth;
     int iHeight;
-    int *tabListeImage;
+    int tabListeImage[NOMBRE_IMAGE_MAX_ANIMATION];
     int iTailleTaubleau;
     float fSpeed;
     bool bRepeat;
-    int current_frame;
+    float current_frame;
     bool bFinish;
+    bool bAnimationEnCour;
 
 } orn_animation;
 
-orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, int iFirst, int *tabListeImage, int iTailleTaubleau, float fSpeed, bool bRepeat, bool bFinish);
+orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, int tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour);
 void orn_animation_freeAnimation(orn_animation *animation);
 
 void orn_animation_updateAnimation(orn_animation *animation);
+void orn_animation_drawAnimation(orn_animation *animation, int iX, int iY);
+
+void orn_animation_startAnimation(orn_animation *animation);
+void orn_animation_stopAnimation(orn_animation *animation);
 
 #endif

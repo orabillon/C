@@ -7,18 +7,19 @@
 	/**
  	* Structure element liste animation
  	*/
-	typedef struct ListAnimation
+	typedef struct orn_listAnimation
 	{
 		orn_animation *animation;
-		struct ListAnimation *next;
-	}ListAnimation;
+		struct orn_listAnimation *next;
+	}orn_listAnimation;
 
-	ListAnimation new_listAnimation(void);
-	bool is_empty_listAnimation(ListAnimation li);
-	void print_listAnimation(ListAnimation li);
-	int listAnimation_length(ListAnimation li);
-	ListAnimation clear_listAnimation(ListAnimation li);
-	ListAnimation deleteAnimation(orn_animation *animation);
-	ListAnimation insertAnimation(orn_animation *animation);
+	orn_listAnimation 	orn_list_listeAnimation_newList(void);
+	orn_listAnimation 	orn_list_listeAnimation_freeList(void);
+	bool 			orn_list_listeAnimation_is_empty(orn_listAnimation li);
+	void 			orn_list_listeAnimation_print(orn_listAnimation li);
+	int 			orn_list_listeAnimation_length(orn_listAnimation li);
+	orn_listAnimation 	orn_list_listeAnimation_clear(orn_listAnimation li);
+	orn_listAnimation 	orn_list_listeAnimation_deleteAnimation(orn_animation *animation);
+	orn_listAnimation 	orn_list_listeAnimation_insertAnimation(orn_animation *animation);
 
 #endif

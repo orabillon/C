@@ -6,7 +6,7 @@
 #include "orn_animation.h"
 #include "orn_param.h"
 
-orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, int tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour)
+orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, unsigned char tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour)
 {
 
     orn_animation *anim = malloc(sizeof(struct orn_animation));
@@ -24,7 +24,7 @@ orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimati
     anim->texture = tex;
     anim->typeAnimation = typeAnimation;
     anim->bFinish = false;
-    anim ->bAnimationEnCour = bEnCour;
+    anim->bAnimationEnCour = bEnCour;
     anim->iTailleTaubleau = iTailleTaubleau;
     anim->current_frame = 0;
     anim->bFinish = false;
@@ -90,10 +90,11 @@ void orn_animation_drawAnimation(orn_animation *animation, int iX, int iY)
 
 void orn_animation_startAnimation(orn_animation *animation)
 {
-    animation ->bAnimationEnCour = true;
+    animation->bAnimationEnCour = true;
+    animation->current_frame = 0;
 }
 
 void orn_animation_stopAnimation(orn_animation *animation)
 {
-    animation ->bAnimationEnCour = false;
+    animation->bAnimationEnCour = false;
 }

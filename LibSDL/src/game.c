@@ -24,7 +24,7 @@ void game_load(void)
     texIndiana = orn_graphics_newImage("assets/images/indiana.png");
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
 
-    int test[] = {0,1,2,3,4,5,6,7};
+    unsigned char test[] = {0,1,2,3,4,5,6,7};
     Indiana = orn_animation_createAnimation(&texIndiana,"WALK",25,24,test,8,0.15f,true,true);
 
 }

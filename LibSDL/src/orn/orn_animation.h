@@ -27,7 +27,7 @@ typedef struct orn_animation
     char *typeAnimation;
     int iWidth;
     int iHeight;
-    int tabListeImage[NOMBRE_IMAGE_MAX_ANIMATION];
+    unsigned char tabListeImage[NOMBRE_IMAGE_MAX_ANIMATION];
     int iTailleTaubleau;
     float fSpeed;
     bool bRepeat;
@@ -37,7 +37,7 @@ typedef struct orn_animation
 
 } orn_animation;
 
-orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, int tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour);
+orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, unsigned char tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour);
 void orn_animation_freeAnimation(orn_animation *animation);
 
 void orn_animation_updateAnimation(orn_animation *animation);

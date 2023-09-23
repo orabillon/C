@@ -8,8 +8,6 @@
 extern int iGameWidth;
 extern int iGameHeight;
 
-
-
 void orn_init(void);
 void orn_close(void);
 

@@ -14,6 +14,8 @@ orn_Texture Vaisseau;
 
 orn_animation *Indiana;
 
+orn_son son;
+
 orn_listAnimation *listeAnimation;
 
 
@@ -27,6 +29,8 @@ void game_load(void)
     texIndiana = orn_graphics_newImage("assets/images/indiana.png");
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
     listeAnimation = orn_list_listeAnimation_newList();
+    son = orn_sound_musique_new("assets/sons/Spiritual.mp3");
+    orn_sound_musique_play(&son,-1);
 
     unsigned char test[] = {0,1,2,3,4,5,6,7};
     Indiana = orn_animation_createAnimation(&texIndiana,"WALK",25,24,test,8,0.15f,true,true);
@@ -54,6 +58,8 @@ void game_close(void)
     orn_font_freeFont(font);
     orn_graphics_freeImage(texIndiana);
     orn_graphics_freeImage(Vaisseau);
+    orn_sound_musique_stop();
+    orn_sound_musique_delete(&son);
 
     orn_list_listeAnimation_freeList(listeAnimation);
     orn_graphics_close();

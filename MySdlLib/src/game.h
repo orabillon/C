@@ -5,5 +5,6 @@ void game_load(void);
 void game_update(float dt);
 void game_draw(void);
 void game_close(void);
+void game_reset(void);
 
 #endif

@@ -10,6 +10,8 @@ SDL_Renderer *orn_sdl_renderer;
 
 float orn_dt = 0;
 Uint32 _frameStart = 0;
+int orn_iGameWidth = 0;
+int orn_iGameHeight = 0;
 
 /**
  * Initialise la fenêtre et le renderer de la SDL2 avec les flags SDL_INIT_EVERYTHING / SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
@@ -93,6 +95,9 @@ bool orn_graphics_init(const char *szTitre, int iWindowWidth, int iWindowHeight,
 
     // Permet d'activer le melange des couleur et l'alpha
     SDL_SetRenderDrawBlendMode(orn_sdl_renderer, SDL_BLENDMODE_BLEND);
+
+    orn_iGameHeight = iGameHeight;
+    orn_iGameWidth = iGameWidth;
 
     return true;
 }

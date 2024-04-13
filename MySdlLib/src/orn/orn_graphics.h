@@ -10,6 +10,8 @@
 
 extern SDL_Renderer *orn_sdl_renderer;
 extern float orn_dt;
+extern int orn_iGameWidth;
+extern int orn_iGameHeight;
 
 /**
  * Represente une image

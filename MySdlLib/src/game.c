@@ -32,8 +32,9 @@ void game_load(void)
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
     listeAnimation = orn_list_listeAnimation_newList();
 
-    unsigned char test[] = {0,1,2,3,4,5,6,7};
-    Indiana = orn_animation_createAnimation(&texIndiana2,"WALK",25,24,test,8,0.15f,true,true);
+    //unsigned char test[] = {0,1,2,3,4,5,6,7};
+    unsigned char test[] = {1}; 
+    Indiana = orn_animation_createAnimation(&texIndiana2,"WALK",25,24,test,8,0.0f,false,true);
     Texte = orn_font_newText("Ceci est un Téxt¨^e",font);
     orn_graphics_setTextureFlip(&Texte, true, true );
     orn_graphics_setTextureAngle(&Texte, 90);
@@ -47,6 +48,10 @@ void game_load(void)
     orn_sound_musique_play(&Musique,1);
 
     Fx = orn_sound_fx_new("assets/sons/Coin.wav");
+}
+
+void game_reset(void){
+
 }
 
 void game_update(float dt)

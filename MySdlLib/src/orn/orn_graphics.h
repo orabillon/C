@@ -13,26 +13,31 @@ extern float orn_dt;
 
 /**
  * Represente une image
+ * @param *sdl_texture Texture SDL2 de l'image
  * @param iWidth Largeur de l'image
  * @param iHeight Hauteur de l'image
- * @param transparency Prendre en compte la transparence pour la texture
+ * @param bTransparency Prendre en compte la transparence pour la texture
  * @param uAlpha 0-255 - pourcentage de transparence de la couleur à appliquer
  * @param uRed   0-255 - pourcentage de rouge de la couleur à appliquer
  * @param uGreen 0-255 - pourcentage de vert de la couleur à appliquer
  * @param uBlue  0-255 - pourcentage de bleu de la couleur à appliquer
- * @param *sdl_texture Texture SDL2 de l'image
+ * @param dAngle Angle de rotation
+ * @param bIsFlipV flip vertical 
+ * @param bIsFlipH flip horizontal
  */
 typedef struct orn_Texture
 {
     SDL_Texture *sdl_texture;
     int iWidth;
     int iHeight;
-    bool transparency;
+    bool bTransparency;
     Uint8 uAlpha;
     Uint8 uRed;
     Uint8 uGreen;
     Uint8 uBlue;
-
+    double dAngle;
+    bool bIsFlipV;
+    bool bIsFlipH;
 } orn_Texture;
 
 /**
@@ -67,6 +72,8 @@ void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int i
 void orn_graphics_drawQuad_game(orn_Texture *tex, int iQuadW, int iQuadH, int iNumFrame, int iX, int iY);
 void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha);
 void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha);
+void orn_graphics_setTextureAngle(orn_Texture *image, double dAngle);
+void orn_graphics_setTextureFlip(orn_Texture *image, bool bFlipV, bool bFlipH);
 
 // Primitive
 void orn_graphics_setColor(Uint8 iRed, Uint8 iGreen, Uint8 iBlue, Uint8 iAlpha);

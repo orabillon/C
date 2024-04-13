@@ -47,7 +47,10 @@ orn_Texture orn_font_newText(const char *texte, orn_Font font)
     texture.uBlue = 255;
     texture.uGreen = 255;
     texture.uRed = 255;
-    texture.transparency = false;
+    texture.bTransparency = false;
+    texture.bIsFlipH = false;
+    texture.bIsFlipV = false;
+    texture.dAngle = 0;
     SDL_FreeSurface(surface);
 
     return texture;

@@ -171,11 +171,20 @@ void orn_graphics_draw(orn_Texture image, int iX, int iY)
 {
     SDL_Rect recDestination = {iX, iY, image.iWidth, image.iHeight};
     SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
-    if (image.transparency)
+    if (image.bTransparency)
     {
         SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
     }
-    SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, NULL, &recDestination);
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+    if(image.bIsFlipH)
+    {
+        flip |= SDL_FLIP_HORIZONTAL;
+    }
+    if (image.bIsFlipV)
+    {
+        flip |= SDL_FLIP_VERTICAL;
+    }
+    SDL_RenderCopyEx(orn_sdl_renderer, image.sdl_texture, NULL, &recDestination,image.dAngle,NULL,flip);
 }
 
 /**
@@ -190,11 +199,20 @@ void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int i
     SDL_Rect recDestination = {iX, iY, rectSource.w, rectSource.h};
     SDL_Rect recSource = {rectSource.x, rectSource.y, rectSource.w, rectSource.h};
     SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
-    if (image.transparency)
+    if (image.bTransparency)
     {
         SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
     }
-    SDL_RenderCopy(orn_sdl_renderer, image.sdl_texture, &recSource, &recDestination);
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+    if(image.bIsFlipH)
+    {
+        flip |= SDL_FLIP_HORIZONTAL;
+    }
+    if (image.bIsFlipV)
+    {
+        flip |= SDL_FLIP_VERTICAL;
+    }
+    SDL_RenderCopyEx(orn_sdl_renderer, image.sdl_texture, &recSource, &recDestination,image.dAngle,NULL,flip);
 }
 
 /**
@@ -253,7 +271,7 @@ SDL_Texture *LoadTexture(const char *path)
  */
 orn_Texture orn_graphics_newImage(const char *path)
 {
-    orn_Texture tex = {NULL, 0, 0, false, 255, 255, 255, 255};
+    orn_Texture tex = {NULL, 0, 0, false, 255, 255, 255, 255, 0, false, false};
 
     tex.sdl_texture = LoadTexture(path);
     if (tex.sdl_texture == NULL)
@@ -305,8 +323,30 @@ void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, 
  */
 void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha)
 {
-    image->transparency = bTransparency;
+    image->bTransparency = bTransparency;
     image->uAlpha = uAlpha;
+}
+
+/**
+ * Modifie l'angle de rotation de la texture
+ * @param *image  pointeur image source
+ * @param dAnggle angle de rotation de la texture
+ */
+void orn_graphics_setTextureAngle(orn_Texture *image, double dAngle)
+{
+    image->dAngle = dAngle;
+}
+
+/**
+ * Modifie le flip de la texture 
+ * @param *image  pointeur image source
+ * @param bFlipV flip vertical
+ * @param bFlipH flip horizontal
+ */
+void orn_graphics_setTextureFlip(orn_Texture *image, bool bFlipV, bool bFlipH)
+{
+    image->bIsFlipH = bFlipH;
+    image->bIsFlipV = bFlipV;
 }
 
 // Primitive

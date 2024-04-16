@@ -24,8 +24,9 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     };
 
-    _orn_keyboard_init();
-    orn_sound_init();
+    //_orn_keyboard_init();
+    orn_init();
+    
 
     printf("Start\n");
 
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
     Nettoyage des pointeur
 */
     game_close();
-    orn_sound_close();
+    
     orn_close();
 
     printf("Fin Programme\n");

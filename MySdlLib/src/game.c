@@ -5,6 +5,7 @@
 #include "orn/orn_sound.h"
 #include "orn/orn_animation.h"
 #include "orn/orn_lists.h"
+#include "orn/orn_pad.h"
 #include <math.h>
 
 /* Variable Jeu*/
@@ -21,6 +22,9 @@ orn_listAnimation *listeAnimation;
 
 orn_son Musique;
 orn_fx Fx;
+
+GameControllerState padControllerState;
+GameControllerState oldPadControllerState;
 
 
 void game_load(void)
@@ -48,6 +52,9 @@ void game_load(void)
     orn_sound_musique_play(&Musique,1);
 
     Fx = orn_sound_fx_new("assets/sons/Coin.wav");
+
+    // chargement pad 
+    updateControllerState(padController, &oldPadControllerState);
 }
 
 void game_reset(void){
@@ -62,6 +69,14 @@ void game_update(float dt)
     {
         orn_sound_fx_play(-1,&Fx,2);
     }
+
+    updateControllerState(padController, &padControllerState);
+
+    if (padControllerState.buttons[SDL_CONTROLLER_BUTTON_X] && !oldPadControllerState.buttons[SDL_CONTROLLER_BUTTON_X]) {
+        printf("Bouton X enfoncé\n");
+    }
+
+    copyControllerState(&padControllerState, &oldPadControllerState);
 }
 
 void game_draw(void)

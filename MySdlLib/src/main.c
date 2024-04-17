@@ -1,8 +1,5 @@
 #include <stdlib.h>
 #include "orn/orn_graphics.h"
-#include "orn/orn_font.h"
-#include "orn/orn_keyboard.h"
-#include "orn/orn_sound.h"
 #include "orn/orn.h"
 #include "game.h"
 
@@ -24,7 +21,6 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     };
 
-    //_orn_keyboard_init();
     orn_init();
     
 

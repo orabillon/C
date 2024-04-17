@@ -9,7 +9,7 @@
  *
  * @return -1 en cas d'échec sinon 1
  * */
-int orn_sound_init()
+int _orn_sound_init()
 {
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
     {
@@ -24,7 +24,7 @@ int orn_sound_init()
 /**
  * Cloture le module audio SDL_MIXER
  */
-void orn_sound_close()
+void _orn_sound_close()
 {
     Mix_CloseAudio();
 }

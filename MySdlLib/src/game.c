@@ -67,7 +67,7 @@ void game_update(float dt)
 
     if(orn_keyboard_KeyPressed("space"))
     {
-        orn_sound_fx_play(-1,&Fx,2);
+        orn_sound_fx_play(-1,&Fx,0);
     }
 
     updateControllerState(padController, &padControllerState);
@@ -92,11 +92,11 @@ void game_draw(void)
 void game_close(void)
 {
     orn_animation_freeAnimation(Indiana);
-    orn_font_freeFont(font);
-    orn_graphics_freeImage(Texte);
-    orn_graphics_freeImage(texIndiana);
-    orn_graphics_freeImage(texIndiana2);
-    orn_graphics_freeImage(Vaisseau);
+    orn_font_freeFont(&font);
+    orn_graphics_freeImage(&Texte);
+    orn_graphics_freeImage(&texIndiana);
+    orn_graphics_freeImage(&texIndiana2);
+    orn_graphics_freeImage(&Vaisseau);
     orn_list_listeAnimation_freeList(listeAnimation);
     orn_sound_musique_delete(&Musique);
     orn_sound_fx_delete(&Fx);

@@ -295,12 +295,12 @@ orn_Texture orn_graphics_newImage(const char *path)
  * Libère la memoire occuper par la texture
  * @param image  texture a supprimer
  */
-void orn_graphics_freeImage(orn_Texture image)
+void orn_graphics_freeImage(orn_Texture *image)
 {
-    if (image.sdl_texture != NULL)
+    if (image->sdl_texture != NULL)
     {
-        SDL_DestroyTexture(image.sdl_texture);
-        image.sdl_texture = NULL;
+        SDL_DestroyTexture(image->sdl_texture);
+        image->sdl_texture = NULL;
     }
 }
 

@@ -22,9 +22,9 @@ typedef struct orn_fx
     Mix_Chunk *sdl_fx;
 } orn_fx;
 
-int orn_sound_init(void);
+int _orn_sound_init(void);
 
-void orn_sound_close();
+void _orn_sound_close();
 
 orn_son orn_sound_musique_new(char *path);
 

@@ -60,7 +60,7 @@ orn_Texture orn_font_newText(const char *texte, orn_Font font)
  * Supprime une police
  * @param font orn_font a supprimer
  */
-void orn_font_freeFont(orn_Font font)
+void orn_font_freeFont(orn_Font *font)
 {
-    TTF_CloseFont(font.sdl_font);
+    TTF_CloseFont(font->sdl_font);
 }

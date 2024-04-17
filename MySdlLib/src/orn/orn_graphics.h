@@ -68,7 +68,7 @@ void orn_graphics_endDraw(void);
 // images
 SDL_Texture *LoadTexture(const char *path);
 orn_Texture orn_graphics_newImage(const char *path);
-void orn_graphics_freeImage(orn_Texture image);
+void orn_graphics_freeImage(orn_Texture *image);
 void orn_graphics_draw(orn_Texture image, int iX, int iY);
 void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int iY);
 void orn_graphics_drawQuad_game(orn_Texture *tex, int iQuadW, int iQuadH, int iNumFrame, int iX, int iY);

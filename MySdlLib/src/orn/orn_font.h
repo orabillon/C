@@ -18,6 +18,6 @@ typedef struct orn_Font
 // Font et Texte
 orn_Font orn_font_newFont(const char *path, int iSize);
 orn_Texture orn_font_newText(const char *texte, orn_Font font);
-void orn_font_freeFont(orn_Font font);
+void orn_font_freeFont(orn_Font *font);
 
 #endif

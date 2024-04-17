@@ -49,13 +49,13 @@ typedef struct orn_Texture
  * @param uBlue  0-255 - pourcentage de bleu de la couleur à appliquer
  * @param uAlpha 0-255 - pourcentage de transparence de la couleur à appliquer
  */
-typedef struct orn_Couleur
+typedef struct orn_couleur
 {
     Uint8 uRed;
     Uint8 uGreen;
     Uint8 uBlue;
     Uint8 uAlpha;
-} orn_Couleur;
+} orn_couleur;
 
 /**
  * Represente un rectangle

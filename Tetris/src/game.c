@@ -1,4 +1,5 @@
 #include "game.h"
+#include "tetros.h"
 
 /* Variable Jeu*/
 
@@ -6,7 +7,7 @@
 
 void game_load(void)
 {
-  
+   test();
 }
 
 void game_reset(void){

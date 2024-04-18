@@ -175,10 +175,10 @@ void orn_graphics_endDraw(void)
 void orn_graphics_draw(orn_Texture image, int iX, int iY)
 {
     SDL_Rect recDestination = {iX, iY, image.iWidth, image.iHeight};
-    SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
+    SDL_SetTextureColorMod(image.sdl_texture, image.couleur.uRed, image.couleur.uGreen, image.couleur.uBlue);
     if (image.bTransparency)
     {
-        SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
+        SDL_SetTextureAlphaMod(image.sdl_texture, image.couleur.uAlpha);
     }
     SDL_RendererFlip flip = SDL_FLIP_NONE;
     if(image.bIsFlipH)
@@ -203,10 +203,10 @@ void orn_graphics_drawQuad(orn_Texture image, orn_rect rectSource, int iX, int i
 {
     SDL_Rect recDestination = {iX, iY, rectSource.w, rectSource.h};
     SDL_Rect recSource = {rectSource.x, rectSource.y, rectSource.w, rectSource.h};
-    SDL_SetTextureColorMod(image.sdl_texture, image.uRed, image.uGreen, image.uBlue);
+    SDL_SetTextureColorMod(image.sdl_texture, image.couleur.uRed, image.couleur.uGreen, image.couleur.uBlue);
     if (image.bTransparency)
     {
-        SDL_SetTextureAlphaMod(image.sdl_texture, image.uAlpha);
+        SDL_SetTextureAlphaMod(image.sdl_texture, image.couleur.uAlpha);
     }
     SDL_RendererFlip flip = SDL_FLIP_NONE;
     if(image.bIsFlipH)
@@ -276,7 +276,7 @@ SDL_Texture *LoadTexture(const char *path)
  */
 orn_Texture orn_graphics_newImage(const char *path)
 {
-    orn_Texture tex = {NULL, 0, 0, false, 255, 255, 255, 255, 0, false, false};
+    orn_Texture tex = {NULL, 0, 0, false, {255, 255, 255, 255}, 0, false, false};
 
     tex.sdl_texture = LoadTexture(path);
     if (tex.sdl_texture == NULL)
@@ -314,10 +314,10 @@ void orn_graphics_freeImage(orn_Texture *image)
  */
 void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, Uint8 uBlue, Uint8 uAlpha)
 {
-    image->uAlpha = uAlpha;
-    image->uRed = uRed;
-    image->uGreen = uGreen;
-    image->uBlue = uBlue;
+    image->couleur.uAlpha = uAlpha;
+    image->couleur.uRed = uRed;
+    image->couleur.uGreen = uGreen;
+    image->couleur.uBlue = uBlue;
 }
 
 /**
@@ -329,7 +329,7 @@ void orn_graphics_SetTextureColor(orn_Texture *image, Uint8 uRed, Uint8 uGreen, 
 void orn_graphics_SetTextureTransparency(orn_Texture *image, bool bTransparency, Uint8 uAlpha)
 {
     image->bTransparency = bTransparency;
-    image->uAlpha = uAlpha;
+    image->couleur.uAlpha = uAlpha;
 }
 
 /**

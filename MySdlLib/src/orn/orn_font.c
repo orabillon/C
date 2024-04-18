@@ -38,15 +38,13 @@ orn_Texture orn_font_newText(const char *texte, orn_Font font)
     orn_Texture texture = {NULL, 0, 0};
     SDL_Surface *surface;
     SDL_Color textColor = {255, 255, 255, 255};
+    orn_couleur tcouleur = {255, 255, 255, 255};
 
     surface = TTF_RenderUTF8_Solid(font.sdl_font, texte, textColor);
     texture.sdl_texture = SDL_CreateTextureFromSurface(orn_sdl_renderer, surface);
     texture.iWidth = surface->w;
     texture.iHeight = surface->h;
-    texture.uAlpha = 255;
-    texture.uBlue = 255;
-    texture.uGreen = 255;
-    texture.uRed = 255;
+    texture.couleur = tcouleur;
     texture.bTransparency = false;
     texture.bIsFlipH = false;
     texture.bIsFlipV = false;

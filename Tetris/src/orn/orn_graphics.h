@@ -14,35 +14,6 @@ extern int orn_iGameWidth;
 extern int orn_iGameHeight;
 
 /**
- * Represente une image
- * @param *sdl_texture Texture SDL2 de l'image
- * @param iWidth Largeur de l'image
- * @param iHeight Hauteur de l'image
- * @param bTransparency Prendre en compte la transparence pour la texture
- * @param uAlpha 0-255 - pourcentage de transparence de la couleur à appliquer
- * @param uRed   0-255 - pourcentage de rouge de la couleur à appliquer
- * @param uGreen 0-255 - pourcentage de vert de la couleur à appliquer
- * @param uBlue  0-255 - pourcentage de bleu de la couleur à appliquer
- * @param dAngle Angle de rotation
- * @param bIsFlipV flip vertical 
- * @param bIsFlipH flip horizontal
- */
-typedef struct orn_Texture
-{
-    SDL_Texture *sdl_texture;
-    int iWidth;
-    int iHeight;
-    bool bTransparency;
-    Uint8 uAlpha;
-    Uint8 uRed;
-    Uint8 uGreen;
-    Uint8 uBlue;
-    double dAngle;
-    bool bIsFlipV;
-    bool bIsFlipH;
-} orn_Texture;
-
-/**
  * Represente une couleur
  * @param uRed   0-255 - pourcentage de rouge de la couleur à appliquer
  * @param uGreen 0-255 - pourcentage de vert de la couleur à appliquer
@@ -56,6 +27,30 @@ typedef struct orn_couleur
     Uint8 uBlue;
     Uint8 uAlpha;
 } orn_couleur;
+
+/**
+ * Represente une image
+ * @param *sdl_texture Texture SDL2 de l'image
+ * @param iWidth Largeur de l'image
+ * @param iHeight Hauteur de l'image
+ * @param bTransparency Prendre en compte la transparence pour la texture
+ * @param couleur orn_couleur
+ * @param bIsFlipV flip vertical 
+ * @param bIsFlipH flip horizontal
+ */
+typedef struct orn_Texture
+{
+    SDL_Texture *sdl_texture;
+    int iWidth;
+    int iHeight;
+    bool bTransparency;
+    orn_couleur couleur;
+    double dAngle;
+    bool bIsFlipV;
+    bool bIsFlipH;
+} orn_Texture;
+
+
 
 /**
  * Represente un rectangle

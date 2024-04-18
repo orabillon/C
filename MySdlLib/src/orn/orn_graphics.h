@@ -34,10 +34,7 @@ typedef struct orn_couleur
  * @param iWidth Largeur de l'image
  * @param iHeight Hauteur de l'image
  * @param bTransparency Prendre en compte la transparence pour la texture
- * @param uAlpha 0-255 - pourcentage de transparence de la couleur à appliquer
- * @param uRed   0-255 - pourcentage de rouge de la couleur à appliquer
- * @param uGreen 0-255 - pourcentage de vert de la couleur à appliquer
- * @param uBlue  0-255 - pourcentage de bleu de la couleur à appliquer
+ * @param couleur orn_couleur
  * @param dAngle Angle de rotation
  * @param bIsFlipV flip vertical 
  * @param bIsFlipH flip horizontal

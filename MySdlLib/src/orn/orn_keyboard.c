@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "orn_keyboard.h"
 #include "SDL.h"
+#include "orn_memoire.h"
 
 const Uint8 *_orn_sdl_keystate;
 int TailleTableau;
@@ -115,12 +116,14 @@ orn_sdlkey *_key_search(const char *key)
 void _orn_keyboard_init(void)
 {
     _orn_sdl_keystate = SDL_GetKeyboardState(&TailleTableau);
-    _orn_oldKeystate = malloc(TailleTableau * sizeof(Uint8));
+    // _orn_oldKeystate = malloc(TailleTableau * sizeof(Uint8));
+    _orn_oldKeystate = orn_memory_alloc(TailleTableau * sizeof(Uint8), "_orn_keyboard_init");
 }
 
 void _orn_keyboard_close(void)
 {
-    free(_orn_oldKeystate);
+    //free(_orn_oldKeystate);
+    orn_memory_free(_orn_oldKeystate,TailleTableau * sizeof(Uint8), "_orn_keyboard_close");
 }
 
 /**

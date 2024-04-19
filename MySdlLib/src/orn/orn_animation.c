@@ -5,11 +5,13 @@
 #include "orn_graphics.h"
 #include "orn_animation.h"
 #include "orn_param.h"
+#include "orn_memoire.h"
 
 orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimation, int iWidth, int iHeight, unsigned char tabListeImage[], int iTailleTaubleau, float fSpeed, bool bRepeat, bool bEnCour)
 {
 
-    orn_animation *anim = malloc(sizeof(struct orn_animation));
+    //orn_animation *anim = malloc(sizeof(struct orn_animation));
+   orn_animation *anim = orn_memory_alloc(sizeof(struct orn_animation),"orn_animation_createAnimation");
     
     if (anim == NULL)
     {
@@ -39,7 +41,7 @@ orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimati
 
 void orn_animation_freeAnimation(orn_animation *animation)
 {
-    free(animation);
+    orn_memory_free(animation, sizeof(struct orn_animation),"orn_animation_createAnimation");
     animation = NULL;
 }
 

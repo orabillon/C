@@ -4,8 +4,8 @@
 #include "orn/orn_keyboard.h"
 #include "orn/orn_sound.h"
 #include "orn/orn_animation.h"
-#include "orn/orn_lists.h"
 #include "orn/orn_pad.h"
+#include "orn/orn_lists.h"
 #include <math.h>
 
 /* Variable Jeu*/
@@ -24,6 +24,11 @@ orn_fx Fx;
 GameControllerState padControllerState;
 GameControllerState oldPadControllerState;
 
+List* listEntier;
+
+void funPrint (void* data){
+    printf(" %d ", *((int*)data));
+}
 
 void game_load(void)
 {
@@ -32,6 +37,44 @@ void game_load(void)
     texIndiana = orn_graphics_newImage("assets/images/indiana.png");
     texIndiana2 = orn_graphics_newImage("assets/images/indiana.png");
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
+
+
+    listEntier = orn_list_new();
+
+    if(orn_list_isEmpty(listEntier)){
+        printf("Liste vide \n");
+    };
+
+    int tailleListe = orn_list_lenght(listEntier);
+    printf("Taille de la liste : %d \n", tailleListe);
+
+    int intTest = 14;
+    int intTest1 = 69;
+    int intTest2 = 44;
+    int intTest3 = 214;
+    int intTest4 = 148;
+
+    orn_list_print(listEntier, " - "); 
+
+    listEntier = orn_list_add_back(listEntier, &intTest, &funPrint);
+    listEntier = orn_list_add_back(listEntier, &intTest1, &funPrint);
+    listEntier = orn_list_remove_back(listEntier);
+    listEntier = orn_list_add_front(listEntier, &intTest2, &funPrint);
+    listEntier = orn_list_add_back(listEntier, &intTest3, &funPrint);
+    listEntier = orn_list_add_front(listEntier, &intTest4, &funPrint);
+
+    orn_list_print(listEntier, " - "); 
+
+    int* pre = orn_list_first(listEntier);
+    int* der = orn_list_last(listEntier);
+
+    printf("Pre = %d  -  Der = %d\n", *pre, *der);
+
+    listEntier = orn_list_clear(listEntier);
+    listEntier = orn_list_remove_back(listEntier);
+
+    tailleListe = orn_list_lenght(listEntier);
+    printf("Taille de la liste : %d \n", tailleListe);
   
 
     //unsigned char test[] = {0,1,2,3,4,5,6,7};
@@ -85,6 +128,7 @@ void game_draw(void)
     orn_graphics_draw(Texte, 15, 150);
 
     orn_animation_drawAnimation(Indiana,150,150);
+
 }
 
 void game_close(void)

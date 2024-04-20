@@ -2,11 +2,7 @@
 #define __LISTS__H__
 
 	#include <stdbool.h>
-
-	/**
-	* Pointeur de fonction 
-	*/
-	typedef void (*fun_print)(void* ptr);
+	#include "orn_memoire.h"
 
 	/**
 	 * Structure noeud generique 
@@ -19,7 +15,7 @@
 		void* data;
 		struct Node* previous;
 		struct Node* next;
-		fun_print print;
+		void (*printFunc)(void*);
 	} Node;
 
 	/**
@@ -36,7 +32,15 @@
 
 
 	List* orn_list_new(void);
-
-
+	bool orn_list_isEmpty(List* li);
+	int orn_list_lenght(List* li);
+	void* orn_list_first(List* li);
+	void* orn_list_last(List* li);
+	void orn_list_print(List* li, char* separateur);
+	List* orn_list_add_back(List* li, void* value, void (*printFunc)(void*)); 
+	List* orn_list_add_front(List* li, void* value, void (*printFunc)(void*));
+	List* orn_list_remove_front(List* li);
+	List* orn_list_remove_back(List* li);
+	List* orn_list_clear(List* li);
 
 #endif

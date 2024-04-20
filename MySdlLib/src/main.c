@@ -15,9 +15,6 @@ int main(int argc, char *argv[])
     };
 
     orn_init();
-    
-
-    printf("Start\n");
 
     /*
     Game Loop
@@ -44,8 +41,6 @@ int main(int argc, char *argv[])
     game_close();
     
     orn_close();
-
-    printf("Fin Programme\n");
 
     return EXIT_SUCCESS;
 }

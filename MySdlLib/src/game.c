@@ -18,8 +18,6 @@ orn_Texture Texte;
 
 orn_animation *Indiana;
 
-orn_listAnimation *listeAnimation;
-
 orn_son Musique;
 orn_fx Fx;
 
@@ -34,7 +32,7 @@ void game_load(void)
     texIndiana = orn_graphics_newImage("assets/images/indiana.png");
     texIndiana2 = orn_graphics_newImage("assets/images/indiana.png");
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
-    listeAnimation = orn_list_listeAnimation_newList();
+  
 
     //unsigned char test[] = {0,1,2,3,4,5,6,7};
     unsigned char test[] = {1}; 
@@ -97,7 +95,6 @@ void game_close(void)
     orn_graphics_freeImage(&texIndiana);
     orn_graphics_freeImage(&texIndiana2);
     orn_graphics_freeImage(&Vaisseau);
-    orn_list_listeAnimation_freeList(listeAnimation);
     orn_sound_musique_delete(&Musique);
     orn_sound_fx_delete(&Fx);
     orn_graphics_close();

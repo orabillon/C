@@ -6,11 +6,10 @@
 
 void orn_init(void)
 {
+    _orn_memory_init();
     _orn_keyboard_init();
     _orn_pad_init();
     _orn_sound_init();
-    _orn_memory_init();
-
 }
 
 void orn_close()

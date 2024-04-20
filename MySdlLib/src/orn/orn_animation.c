@@ -41,7 +41,7 @@ orn_animation *orn_animation_createAnimation(orn_Texture *tex, char *typeAnimati
 
 void orn_animation_freeAnimation(orn_animation *animation)
 {
-    orn_memory_free(animation, sizeof(struct orn_animation),"orn_animation_createAnimation");
+    orn_memory_free(animation, sizeof(struct orn_animation),"orn_animation_freeAnimation");
     animation = NULL;
 }
 

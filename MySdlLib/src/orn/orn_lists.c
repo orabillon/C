@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "orn_lists.h"
-#include "orn_animation.h"
 
-orn_listAnimation *orn_list_listeAnimation_newList(void)
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+* Retourne une Liste vide
+* @return Une nouvelle Liste
+*/
+List* orn_list_new(void)
 {
-    return NULL;
+	return NULL;
 }
 
-void orn_list_listeAnimation_freeList(orn_listAnimation *li)
-{
-    
-}

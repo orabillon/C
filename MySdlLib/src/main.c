@@ -2,21 +2,14 @@
 #include "orn/orn_graphics.h"
 #include "orn/orn.h"
 #include "game.h"
+#include "orn/orn_param.h"
 
 int main(int argc, char *argv[])
 {
     /* Permet l'affichage des printf sans tampons*/
     setvbuf(stdout, NULL, _IONBF, 0);
 
-    /*
-        variable
-    */
-    int iGameWidth = 320;
-    int iGameHeight = 200;
-    int iWindowWidth = iGameWidth * 3;
-    int iWindowHeight = iGameHeight * 3;
-
-    if (!orn_graphics_init("Demo SDL", iWindowWidth, iWindowHeight, iGameWidth, iGameHeight, false))
+    if (!orn_graphics_init(TITRE_JEU, FENETRE_WIDTH, FENETRE_HEIGHT, JEU_WIDTH, JEU_HEIGHT, PLEIN_ECRAN))
     {
         return EXIT_FAILURE;
     };

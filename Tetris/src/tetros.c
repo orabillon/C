@@ -23,6 +23,6 @@ void test(){
 
     myTetros.tabTetros = tableau;
 
-    printf("%d", myTetros.tabTetros[1][2][1]);
+    printf("%d \n", myTetros.tabTetros[1][2][1]);
 
 }

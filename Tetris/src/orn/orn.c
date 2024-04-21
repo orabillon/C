@@ -2,9 +2,11 @@
 #include "orn_keyboard.h"
 #include "orn_pad.h"
 #include "orn_sound.h"
+#include "orn_memoire.h"
 
 void orn_init(void)
 {
+    _orn_memory_init();
     _orn_keyboard_init();
     _orn_pad_init();
     _orn_sound_init();
@@ -15,4 +17,5 @@ void orn_close()
     _orn_keyboard_close();
     _orn_pad_close();
     _orn_sound_close();
+    orn_memory_check();
 }

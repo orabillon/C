@@ -35,6 +35,7 @@ typedef struct orn_couleur
  * @param iHeight Hauteur de l'image
  * @param bTransparency Prendre en compte la transparence pour la texture
  * @param couleur orn_couleur
+ * @param dAngle Angle de rotation
  * @param bIsFlipV flip vertical 
  * @param bIsFlipH flip horizontal
  */
@@ -49,7 +50,6 @@ typedef struct orn_Texture
     bool bIsFlipV;
     bool bIsFlipH;
 } orn_Texture;
-
 
 
 /**

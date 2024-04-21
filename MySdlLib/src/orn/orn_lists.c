@@ -275,6 +275,54 @@ List* orn_list_remove_back(List* li)
 
 
 /**
+* Retire un élément de la Liste
+* @param li La Liste
+* @param target element a supprimer
+* @return La Liste moins l'élément supprimé
+*/
+List* orn_list_remove_element(List* li, void* target)
+{
+	if(orn_list_isEmpty(li))
+	{
+		printf("Rien a supprimer, la Liste est deja vide.\n");
+		return orn_list_new();
+	}
+
+	Node *current = li->begin;
+
+	while (current != NULL) {
+        if (current->data == target) {
+            if (current->previous != NULL)
+			{
+				current->previous->next = current->next;
+			}
+            else
+			{
+				li->begin = current->next;
+			}
+                
+            if (current->next != NULL)
+			{
+				current->next->previous = current->previous;
+			} 
+            else
+			{
+				li->end = current->previous;
+			}
+                
+            free(current);
+            li->length--;
+			
+			return li;
+        }
+        current = current->next;
+    }
+
+	return li;
+}
+
+
+/**
 * Nettoie complètement une Liste de ses éléments
 * @param li La Liste à effacer
 * @return Une nouvelle Liste (vide)

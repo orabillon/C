@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "assert.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "xutility": "c"
     }
 }

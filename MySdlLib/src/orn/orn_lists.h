@@ -41,6 +41,7 @@
 	List* orn_list_add_front(List* li, void* value, void (*printFunc)(void*));
 	List* orn_list_remove_front(List* li);
 	List* orn_list_remove_back(List* li);
+	List* orn_list_remove_element(List* li, void* target);
 	List* orn_list_clear(List* li);
 
 #endif

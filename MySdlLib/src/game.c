@@ -70,8 +70,11 @@ void game_load(void)
 
     printf("Pre = %d  -  Der = %d\n", *pre, *der);
 
-    listEntier = orn_list_clear(listEntier);
-    listEntier = orn_list_remove_back(listEntier);
+    listEntier = orn_list_remove_element(listEntier, &intTest2);
+    orn_list_print(listEntier, " - "); 
+
+   // listEntier = orn_list_clear(listEntier);
+   // listEntier = orn_list_remove_back(listEntier);
 
     tailleListe = orn_list_lenght(listEntier);
     printf("Taille de la liste : %d \n", tailleListe);

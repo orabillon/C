@@ -1,7 +1,11 @@
 #ifndef __LISTS__H__
 #define __LISTS__H__
 
+	#include <stdio.h>
+	#include <stdlib.h>
 	#include <stdbool.h>
+	#include <time.h>
+	#include "orn_lists.h"
 	#include "orn_memoire.h"
 
 	/**
@@ -31,17 +35,32 @@
 	} List;
 
 
-	List* orn_list_new(void);
+	List* orn_list_newList(void);
+
 	bool orn_list_isEmpty(List* li);
 	int orn_list_lenght(List* li);
-	void* orn_list_first(List* li);
-	void* orn_list_last(List* li);
+	void* orn_list_getFirst(List* li);
+	void* orn_list_getLast(List* li);
 	void orn_list_print(List* li, char* separateur);
-	List* orn_list_add_back(List* li, void* value, void (*printFunc)(void*)); 
-	List* orn_list_add_front(List* li, void* value, void (*printFunc)(void*));
-	List* orn_list_remove_front(List* li);
-	List* orn_list_remove_back(List* li);
-	List* orn_list_remove_element(List* li, void* target);
+
+	List* orn_list_addBack(List* li, void* value, void (*printFunc)(void*)); 
+	List* orn_list_addFront(List* li, void* value, void (*printFunc)(void*));
+	List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(void*));
+
+	List* orn_list_removeFront(List* li);
+	List* orn_list_removeBack(List* li);
+	List* orn_list_removeElement(List* li, void* target);
+	int orn_list_getIndex(List *li, void *target);
+	List* orn_list_removeAtIndex(List *list, int index); 
 	List* orn_list_clear(List* li);
+	List* orn_list_removeDuplicates(List *li);
+	List* orn_list_removeInRange(List *li, int start, int end);
+
+	bool orn_list_contains(List *li, void *data);
+	List* orn_list_concatenate(List *liBase, List *liAConcatener);
+	List* orn_list_map(List *li, void (*function)(void *)); 
+	List* orn_list_slice(List *li, int start, int end);
+	List* orn_list_filter(List *li, int (*predicate)(void *)); 
+	List* orn_list_shuffle(List *li);
 
 #endif

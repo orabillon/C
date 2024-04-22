@@ -1,7 +1,7 @@
 #ifndef __ORN_PARAM__H__
 #define __ORN_PARAM__H__
 
-#define MODE_DEBUG true
+#define MODE_DEBUG false
 
 #define NOMBRE_IMAGE_MAX_ANIMATION 20
 #define TITRE_JEU "Titre du jeu"

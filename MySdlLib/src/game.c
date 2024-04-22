@@ -25,9 +25,18 @@ GameControllerState padControllerState;
 GameControllerState oldPadControllerState;
 
 List* listEntier;
+List* listEntier2;
 
 void funPrint (void* data){
     printf(" %d ", *((int*)data));
+}
+void multiplyByTwo(void *data) {
+    *(int*)data *= 2;
+}
+// Fonction pour filtrer les éléments supérieurs à un certain seuil
+int isGreaterThan(void *data) {
+    int value = *(int*)data;
+    return value > 350;
 }
 
 void game_load(void)
@@ -39,7 +48,8 @@ void game_load(void)
     Vaisseau = orn_graphics_newImage("assets/images/player.png");
 
 
-    listEntier = orn_list_new();
+    listEntier = orn_list_newList();
+    listEntier2 = orn_list_newList();
 
     if(orn_list_isEmpty(listEntier)){
         printf("Liste vide \n");
@@ -53,32 +63,43 @@ void game_load(void)
     int intTest2 = 44;
     int intTest3 = 214;
     int intTest4 = 148;
+    int intTest5 = 500;
 
+    int intTest6 = 140;
+    int intTest7 = 690;
+    int intTest8 = 440;
+    int intTest9 = 2140;
+    int intTest10 = 1480;
+    int intTest11 = 5000;
+
+    listEntier = orn_list_addBack(listEntier, &intTest, &funPrint);
+    listEntier = orn_list_addBack(listEntier, &intTest1, &funPrint);
+    listEntier = orn_list_addFront(listEntier, &intTest2, &funPrint);
+    listEntier = orn_list_addBack(listEntier, &intTest3, &funPrint);
+    listEntier = orn_list_addFront(listEntier, &intTest4, &funPrint);
+    listEntier = orn_list_addBack(listEntier, &intTest5, &funPrint);
+    listEntier = orn_list_addFront(listEntier, &intTest11, &funPrint);
+    listEntier = orn_list_addBack(listEntier, &intTest9, &funPrint);
+    listEntier = orn_list_addFront(listEntier, &intTest10, &funPrint);
+
+    listEntier2 = orn_list_addBack(listEntier2, &intTest6, &funPrint);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest7, &funPrint);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest8, &funPrint);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest9, &funPrint);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest10, &funPrint);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest11, &funPrint);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest3, &funPrint);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest4, &funPrint);
+
+ 
     orn_list_print(listEntier, " - "); 
 
-    listEntier = orn_list_add_back(listEntier, &intTest, &funPrint);
-    listEntier = orn_list_add_back(listEntier, &intTest1, &funPrint);
-    listEntier = orn_list_remove_back(listEntier);
-    listEntier = orn_list_add_front(listEntier, &intTest2, &funPrint);
-    listEntier = orn_list_add_back(listEntier, &intTest3, &funPrint);
-    listEntier = orn_list_add_front(listEntier, &intTest4, &funPrint);
+    listEntier = orn_list_removeInRange(listEntier,5,7);
 
     orn_list_print(listEntier, " - "); 
-
-    int* pre = orn_list_first(listEntier);
-    int* der = orn_list_last(listEntier);
-
-    printf("Pre = %d  -  Der = %d\n", *pre, *der);
-
-    listEntier = orn_list_remove_element(listEntier, &intTest2);
-    orn_list_print(listEntier, " - "); 
-
-   // listEntier = orn_list_clear(listEntier);
-   // listEntier = orn_list_remove_back(listEntier);
-
-    tailleListe = orn_list_lenght(listEntier);
-    printf("Taille de la liste : %d \n", tailleListe);
-  
+    
+    listEntier = orn_list_clear(listEntier); 
+    listEntier2 = orn_list_clear(listEntier2); 
 
     //unsigned char test[] = {0,1,2,3,4,5,6,7};
     unsigned char test[] = {1}; 

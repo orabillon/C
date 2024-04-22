@@ -2,6 +2,8 @@
     "files.associations": {
         "assert.h": "c",
         "stdio.h": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "game.h": "c",
+        "orn_memoire.h": "c"
     }
 }

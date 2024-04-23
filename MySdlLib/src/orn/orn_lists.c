@@ -73,7 +73,7 @@ void* orn_list_getLast(List* li)
 * Affiche une Liste
 * @param li La Liste à parcourir
 */
-void orn_list_print(List* li, char* separateur)
+void orn_list_print(List* li, char* separateur, void (*printFunc)(void*))
 {
 	if(orn_list_isEmpty(li))
 	{
@@ -87,7 +87,7 @@ void orn_list_print(List* li, char* separateur)
    
    while(temp != NULL)
 	{
-        (temp->printFunc)(temp->data);
+        printFunc(temp->data);
         printf("%s",separateur);
 
 		temp = temp->next;
@@ -105,7 +105,7 @@ void orn_list_print(List* li, char* separateur)
 * @param void (*printFunc)(void*) pointeur de fonction pour l'affichage d'un element 
 * @return La Liste avec son élément ajouté
 */
-List* orn_list_addBack(List* li, void* value, void (*printFunc)(void*))
+List* orn_list_addBack(List* li, void* value)
 {
 	Node* element;
 
@@ -120,7 +120,6 @@ List* orn_list_addBack(List* li, void* value, void (*printFunc)(void*))
 	element->data = value;
 	element->next = NULL;
 	element->previous = NULL;
-	element->printFunc = printFunc;
 
 	if(orn_list_isEmpty(li))
 	{
@@ -156,7 +155,7 @@ List* orn_list_addBack(List* li, void* value, void (*printFunc)(void*))
 * @param (*printFunc)(void*) pointeur de fonction pour l'affichage d'un element  
 * @return La Liste avec son élémént ajouté
 */
-List* orn_list_addFront(List* li, void* value, void (*printFunc)(void*))
+List* orn_list_addFront(List* li, void* value)
 {
 	Node* element;
 
@@ -171,7 +170,6 @@ List* orn_list_addFront(List* li, void* value, void (*printFunc)(void*))
 	element->data = value;
 	element->next = NULL;
 	element->previous = NULL;
-	element->printFunc = printFunc;
 
 	if(orn_list_isEmpty(li))
 	{
@@ -207,7 +205,7 @@ List* orn_list_addFront(List* li, void* value, void (*printFunc)(void*))
 * @param void (*printFunc)(void*)) pointeur de fonction pour l'affichage de l'element 
 * @return La Liste avec son élémént ajouté
 */
-List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(void*))
+List* orn_list_insertAtIndex(List* li, int index, void *data)
 {
     if (index < 0 || index > li->length)
 	{
@@ -222,7 +220,6 @@ List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(
         newNode->data = data;
         newNode->previous = NULL;
         newNode->next = li->begin;
-		newNode->printFunc = printFunc;
 
         if (li->begin != NULL)
 		{
@@ -239,7 +236,7 @@ List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(
 	else if (index == li->length) 
 	{
         // Insérer à la fin de la liste
-        orn_list_addBack(li, data, printFunc);
+        orn_list_addBack(li, data);
     } 
 	else 
 	{
@@ -254,7 +251,6 @@ List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(
         newNode->data = data;
         newNode->previous = current;
         newNode->next = current->next;
-		newNode->printFunc = printFunc;
         current->next->previous = newNode;
         current->next = newNode;
     }
@@ -562,7 +558,7 @@ List* orn_list_slice(List *li, int start, int end)
 
     for (int i = start; i <= end; i++) 
 	{
-        result = orn_list_addBack(result,current->data, current->printFunc);
+        result = orn_list_addBack(result,current->data);
         current = current->next;
     }
 
@@ -584,7 +580,7 @@ List* orn_list_filter(List *li, int (*predicate)(void *))
 	{
         if (predicate(current->data)) 
 		{
-            result = orn_list_addBack(result, current->data, current->printFunc);
+            result = orn_list_addBack(result, current->data);
         }
 
         current = current->next;

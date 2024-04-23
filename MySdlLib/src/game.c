@@ -72,31 +72,31 @@ void game_load(void)
     int intTest10 = 1480;
     int intTest11 = 5000;
 
-    listEntier = orn_list_addBack(listEntier, &intTest, &funPrint);
-    listEntier = orn_list_addBack(listEntier, &intTest1, &funPrint);
-    listEntier = orn_list_addFront(listEntier, &intTest2, &funPrint);
-    listEntier = orn_list_addBack(listEntier, &intTest3, &funPrint);
-    listEntier = orn_list_addFront(listEntier, &intTest4, &funPrint);
-    listEntier = orn_list_addBack(listEntier, &intTest5, &funPrint);
-    listEntier = orn_list_addFront(listEntier, &intTest11, &funPrint);
-    listEntier = orn_list_addBack(listEntier, &intTest9, &funPrint);
-    listEntier = orn_list_addFront(listEntier, &intTest10, &funPrint);
+    listEntier = orn_list_addBack(listEntier, &intTest);
+    listEntier = orn_list_addBack(listEntier, &intTest1);
+    listEntier = orn_list_addFront(listEntier, &intTest2);
+    listEntier = orn_list_addBack(listEntier, &intTest3);
+    listEntier = orn_list_addFront(listEntier, &intTest4);
+    listEntier = orn_list_addBack(listEntier, &intTest5);
+    listEntier = orn_list_addFront(listEntier, &intTest11);
+    listEntier = orn_list_addBack(listEntier, &intTest9);
+    listEntier = orn_list_addFront(listEntier, &intTest10);
 
-    listEntier2 = orn_list_addBack(listEntier2, &intTest6, &funPrint);
-    listEntier2 = orn_list_addBack(listEntier2, &intTest7, &funPrint);
-    listEntier2 = orn_list_addFront(listEntier2, &intTest8, &funPrint);
-    listEntier2 = orn_list_addBack(listEntier2, &intTest9, &funPrint);
-    listEntier2 = orn_list_addFront(listEntier2, &intTest10, &funPrint);
-    listEntier2 = orn_list_addFront(listEntier2, &intTest11, &funPrint);
-    listEntier2 = orn_list_addBack(listEntier2, &intTest3, &funPrint);
-    listEntier2 = orn_list_addFront(listEntier2, &intTest4, &funPrint);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest6);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest7);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest8);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest9);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest10);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest11);
+    listEntier2 = orn_list_addBack(listEntier2, &intTest3);
+    listEntier2 = orn_list_addFront(listEntier2, &intTest4);
 
  
-    orn_list_print(listEntier, " - "); 
+    orn_list_print(listEntier, " - ", &funPrint); 
 
     listEntier = orn_list_removeInRange(listEntier,5,7);
 
-    orn_list_print(listEntier, " - "); 
+    orn_list_print(listEntier, " - ", &funPrint); 
     
     listEntier = orn_list_clear(listEntier); 
     listEntier2 = orn_list_clear(listEntier2); 

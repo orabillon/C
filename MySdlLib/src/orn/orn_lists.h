@@ -19,7 +19,6 @@
 		void* data;
 		struct Node* previous;
 		struct Node* next;
-		void (*printFunc)(void*);
 	} Node;
 
 	/**
@@ -41,11 +40,11 @@
 	int orn_list_lenght(List* li);
 	void* orn_list_getFirst(List* li);
 	void* orn_list_getLast(List* li);
-	void orn_list_print(List* li, char* separateur);
+	void orn_list_print(List* li, char* separateur,void (*printFunc)(void*));
 
-	List* orn_list_addBack(List* li, void* value, void (*printFunc)(void*)); 
-	List* orn_list_addFront(List* li, void* value, void (*printFunc)(void*));
-	List* orn_list_insertAtIndex(List* li, int index, void *data, void (*printFunc)(void*));
+	List* orn_list_addBack(List* li, void* value); 
+	List* orn_list_addFront(List* li, void* value);
+	List* orn_list_insertAtIndex(List* li, int index, void *data);
 
 	List* orn_list_removeFront(List* li);
 	List* orn_list_removeBack(List* li);

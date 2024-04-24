@@ -11,9 +11,9 @@ List* Tetrominos;
 
 void funPrint (void* data){
 
-    //int valeur = ((tetros*)data)->tabTetros[1][2][1];
-    //printf(" fonction pointe %d ", valeur);
-    printf("toto");
+    int valeur = ((tetros*)data)->tabTetros[1][2][1];
+    printf(" fonction pointe %d ", valeur);
+    
 }
 
 void game_load(void)
@@ -21,10 +21,10 @@ void game_load(void)
     
     Tetrominos = orn_list_newList();
     
-    tetros *TetrosOne = NULL;
+    tetros TetrosOne;
 
      
-     int tableau[2][4][4] = {
+    int tableau[2][4][4] = {
     {
         {0, 0, 0, 0},
         {0, 0, 0, 0},
@@ -39,13 +39,13 @@ void game_load(void)
     }
     };
 
-    TetrosOne->tabTetros = tableau;
-    printf("totot");
-   // Tetrominos = orn_list_addBack(Tetrominos,TetrosOne);
+    TetrosOne.tabTetros = tableau;
+   
+    Tetrominos = orn_list_addBack(Tetrominos,&TetrosOne);
 
-  //  orn_list_print(Tetrominos," - ", &funPrint);
+    orn_list_print(Tetrominos," - ", &funPrint);
 
-  //  printf("%d \n", TetrosOne->tabTetros[1][2][1]);
+   orn_list_clear(Tetrominos);
 }
 
 void game_reset(void){

@@ -13,7 +13,6 @@
 	 * @param data donne de la structure
 	 * @param previous noeud precedent 
 	 * @param next noeud suivant de la lise 
-	 * @param fun_print pointeur de fonction pour afficher l'element
 	 */
 	 typedef struct Node {
 		void* data;

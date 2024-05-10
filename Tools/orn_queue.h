@@ -22,7 +22,7 @@ typedef struct Node {
 * @param last Pointeur vers le dernier élément dans la queue
 * @param lenght Taille actuelle de la queue
 */
-typedef struct {
+typedef struct Queue{
     Node *first;   
     Node *last;      
     int lenght;     

@@ -119,3 +119,34 @@ void orn_queue_remove(Queue *queue)
     orn_memory_free(queue,sizeof(Queue),"orn_queue_remove");
 }
 
+/**
+* Affiche la queue sans alteration de la queue 
+* @param queue queue a afficher
+* @param separateur separateur pour l'affichage
+* @param void (*printFunc)(void*) pointeur de fonction pour l'affichage
+*/
+void orn_queue_print(Queue *Queue, char* separateur,void (*printFunc)(void*))
+{
+    if(orn_queue_isEmpty(Queue))
+	{
+		printf("Rien a afficher, la file est vide.\n");
+		return;
+	}
+
+	Node* temp = Queue->first;
+
+	printf("[ ");
+   
+   while(temp != NULL)
+	{
+        printFunc(temp->data);
+        printf("%s",separateur);
+
+		temp = temp->next;
+	}
+
+    printf(" ]\n");
+
+	printf("\n");
+}
+

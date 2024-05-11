@@ -72,6 +72,7 @@ void* orn_list_getLast(List* li)
 /**
 * Affiche une Liste
 * @param li La Liste à parcourir
+* @param void (*printFunc)(void*) pointeur de fonction pour l'affichage
 */
 void orn_list_print(List* li, char* separateur, void (*printFunc)(void*))
 {

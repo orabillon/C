@@ -1,6 +1,11 @@
 #include "orn_queue.h"
 #include "orn_memoire.h"
 
+// Fonction pour afficher un entier
+void printInt(void* data) {
+    printf("%d", *((int*)data));
+}
+
 int main() {
 _orn_memory_init();
 memoire_debug = true;
@@ -16,6 +21,12 @@ memoire_debug = true;
     orn_queue_enqueue(queue, &j);
         
     printf("Taille de la queue: %d\n", orn_queue_lenght(queue));
+
+    orn_queue_print(queue, "-", printInt);
+
+    orn_queue_dequeue(queue);
+
+    orn_queue_print(queue, "-", printInt);
     
     orn_queue_remove(queue);
 

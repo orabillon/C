@@ -22,6 +22,8 @@ memoire_debug = true;
         
     printf("Taille de la queue: %d\n", orn_queue_lenght(queue));
 
+    printf("Element a l'index 1 : %d \n", *((int*)orn_queue_getAtIndex(queue,1)));
+
     orn_queue_print(queue, "-", printInt);
 
     orn_queue_dequeue(queue);

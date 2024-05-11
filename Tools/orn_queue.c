@@ -125,15 +125,15 @@ void orn_queue_remove(Queue *queue)
 * @param separateur separateur pour l'affichage
 * @param void (*printFunc)(void*) pointeur de fonction pour l'affichage
 */
-void orn_queue_print(Queue *Queue, char* separateur,void (*printFunc)(void*))
+void orn_queue_print(Queue *queue, char* separateur,void (*printFunc)(void*))
 {
-    if(orn_queue_isEmpty(Queue))
+    if(orn_queue_isEmpty(queue))
 	{
 		printf("Rien a afficher, la file est vide.\n");
 		return;
 	}
 
-	Node* temp = Queue->first;
+	Node* temp = queue->first;
 
 	printf("[ ");
    
@@ -150,3 +150,23 @@ void orn_queue_print(Queue *Queue, char* separateur,void (*printFunc)(void*))
 	printf("\n");
 }
 
+/**
+* Retourne l'élément à l'index donné dans la queue
+* @param queue queue pour la recherche
+* @param index index de l'élément rechercher 
+* @result *void pointeur de la donnée trouver 
+*/
+void* orn_queue_getAtIndex(Queue *queue, int index) {
+    if (index < 0 || index >= queue->lenght) {
+        fprintf(stderr, "Index hors limites.\n");
+        return NULL;
+    }
+
+    Node *current = queue->first;
+
+    for (int i = 0; i < index; i++) {
+        current = current->next;
+    }
+
+    return current->data;
+}

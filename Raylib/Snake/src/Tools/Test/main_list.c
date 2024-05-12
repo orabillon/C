@@ -31,6 +31,9 @@ int main() {
         my_list = orn_list_addBack(my_list, value);
     }
 
+    // Affiche l'element a l'index 3
+    printf("contenu a l'index 3 : %d \n", *((int*)orn_list_getAtIndex(my_list,2)));
+
     // Affichage de la liste
     printf("Contenu de la liste :\n");
     orn_list_print(my_list, ", ", printInt);

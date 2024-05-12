@@ -22,7 +22,7 @@ typedef struct Node {
 * @param last Pointeur vers le dernier élément dans la queue
 * @param lenght Taille actuelle de la queue
 */
-typedef struct {
+typedef struct Queue{
     Node *first;   
     Node *last;      
     int lenght;     
@@ -35,5 +35,7 @@ void* orn_queue_dequeue(Queue *queue);
 int orn_queue_lenght(Queue *queue);
 void orn_queue_remove(Queue *queue);
 void orn_queue_clearQueue(Queue *queue);
+void orn_queue_print(Queue *queue, char* separateur,void (*printFunc)(void*));
+void* orn_queue_getAtIndex(Queue *queue, int index);
 
 #endif

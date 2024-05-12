@@ -40,6 +40,7 @@
 	void* orn_list_getFirst(List* li);
 	void* orn_list_getLast(List* li);
 	void orn_list_print(List* li, char* separateur,void (*printFunc)(void*));
+	void* orn_list_getAtIndex(List* li, int index);
 
 	List* orn_list_addBack(List* li, void* value); 
 	List* orn_list_addFront(List* li, void* value);

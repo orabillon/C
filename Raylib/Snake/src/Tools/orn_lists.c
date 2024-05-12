@@ -72,6 +72,7 @@ void* orn_list_getLast(List* li)
 /**
 * Affiche une Liste
 * @param li La Liste à parcourir
+* @param void (*printFunc)(void*) pointeur de fonction pour l'affichage
 */
 void orn_list_print(List* li, char* separateur, void (*printFunc)(void*))
 {
@@ -748,5 +749,33 @@ List* orn_list_removeInRange(List *li, int start, int end)
     }
 
 	return li;
+}
+
+/**
+* Fonction pour retourner un éléments de la liste a un indices donner
+* @param li liste pour la suppression 
+* @param index index de l'élément rechercher
+* @return void retourne le pointeur de l'element trouver ou null
+*/
+void* orn_list_getAtIndex(List* li, int index) {
+    if (li == NULL || index < 0 || index >= li->length) {
+        return NULL; // Index invalide ou liste vide
+    }
+
+    Node* current = li->begin;
+    int currentIndex = 0;
+
+    // Parcourir la liste jusqu'à l'index spécifié
+    while (current != NULL && currentIndex < index) {
+        current = current->next;
+        currentIndex++;
+    }
+
+    // Vérifier si l'élément à l'index spécifié a été trouvé
+    if (current != NULL && currentIndex == index) {
+        return current->data;
+    } else {
+        return NULL; // Index hors limites
+    }
 }
 
